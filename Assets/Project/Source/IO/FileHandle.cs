@@ -1,30 +1,38 @@
 ﻿using System;
 using System.IO;
 
-namespace Exa.IO
-{
+namespace Exa.IO {
     /// <summary>
-    /// Provides a reference to a file that may have its name updated
+    ///     Provides a reference to a file that may have its name updated
     /// </summary>
-    public class FileHandle
-    {
+    public class FileHandle {
+        private readonly ISerializableItem item;
         private readonly Func<string, string> pathFactory;
         private readonly Action<string> serializationFactory;
-        private readonly ISerializableItem item;
 
-        public string CurrentPath { get; set; }
-        public string TargetPath => pathFactory(item.ItemName);
-        public bool PathIsDirty => CurrentPath != TargetPath;
-
-        public FileHandle(ISerializableItem item, Func<string, string> pathFactory, Action<string> serializationFactory,
-            bool generatePath = true) {
+        public FileHandle(
+            ISerializableItem item,
+            Func<string, string> pathFactory,
+            Action<string> serializationFactory,
+            bool generatePath = true
+        ) {
             this.item = item;
             this.pathFactory = pathFactory;
             this.serializationFactory = serializationFactory;
 
             if (generatePath) {
-                this.CurrentPath = pathFactory(item.ItemName);
+                CurrentPath = pathFactory(item.ItemName);
             }
+        }
+
+        public string CurrentPath { get; set; }
+
+        public string TargetPath {
+            get => pathFactory(item.ItemName);
+        }
+
+        public bool PathIsDirty {
+            get => CurrentPath != TargetPath;
         }
 
         public void Delete() {

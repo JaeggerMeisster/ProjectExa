@@ -15,4 +15,4 @@ MonoBehaviour:
   typeGuid: 1
   displayName: Battleship
   maxSize: {x: 22, y: 15}
-  disallowedBlockCategories: 32
+  allowedBlockCategory: 351

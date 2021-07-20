@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06fcb04f4268c2a4ba5d6b8f91425149, type: 3}
+  m_Name: PlayerMothership
+  m_EditorClassIdentifier: 
+  blueprintJson: "{\r\n   \"name\":\"defaultPlayerMothership\",\r\n   \"shipClass\":6,\r\n  
+    \"blocks\":{\r\n      \"15,16\":{\r\n         \"id\":\"GaussCannon\"\r\n     
+    },\r\n      \"17,17\":{\r\n         \"id\":\"HeavyArmor\"\r\n      },\r\n     
+    \"17,16\":{\r\n         \"id\":\"HeavyArmor\"\r\n      },\r\n      \"15,18\":{\r\n        
+    \"id\":\"SmallReactor\"\r\n      },\r\n      \"16,18\":{\r\n         \"id\":\"SmallReactor\"\r\n     
+    },\r\n      \"15,15\":{\r\n         \"id\":\"SmallReactor\"\r\n      },\r\n     
+    \"16,15\":{\r\n         \"id\":\"SmallReactor\"\r\n      },\r\n      \"17,15\":{\r\n        
+    \"id\":\"LightArmor\"\r\n      },\r\n      \"17,18\":{\r\n         \"id\":\"LightArmor\"\r\n     
+    },\r\n      \"14,18\":{\r\n         \"id\":\"LightArmor\"\r\n      },\r\n     
+    \"14,15\":{\r\n         \"id\":\"LightArmor\"\r\n      },\r\n      \"14,17\":{\r\n        
+    \"id\":\"HeavyArmor\"\r\n      },\r\n      \"14,16\":{\r\n         \"id\":\"HeavyArmor\"\r\n     
+    },\r\n      \"15,19\":{\r\n         \"id\":\"HeavyArmor\"\r\n      },\r\n     
+    \"16,19\":{\r\n         \"id\":\"HeavyArmor\"\r\n      },\r\n      \"15,14\":{\r\n        
+    \"id\":\"HeavyArmor\"\r\n      },\r\n      \"16,14\":{\r\n         \"id\":\"HeavyArmor\"\r\n     
+    }\n   }\r\n}"

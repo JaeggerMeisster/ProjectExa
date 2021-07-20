@@ -1,7 +1,5 @@
-﻿namespace UCommandConsole
-{
-    public enum ParameterType
-    {
+﻿namespace UCommandConsole {
+    public enum ParameterType {
         Required,
         Optional
     }

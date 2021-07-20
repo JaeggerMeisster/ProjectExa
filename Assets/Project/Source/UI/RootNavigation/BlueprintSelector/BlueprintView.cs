@@ -1,14 +1,13 @@
 ﻿using Exa.Grids.Blueprints;
+using Exa.Types.Binding;
 using UnityEngine;
 using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI
-{
-    public class BlueprintView : MonoBehaviour, Bindings.IObserver<Blueprint>
-    {
-        [Header("References")] 
+namespace Exa.UI {
+    public class BlueprintView : MonoBehaviour, IObserver<Blueprint> {
+        [Header("References")]
         public Button deleteButton;
         public Button button;
         public Hoverable hoverable;
@@ -24,8 +23,7 @@ namespace Exa.UI
                 var thumbnailRect = new Rect(0, 0, 512, 512);
                 var thumbnailPivot = new Vector2(0.5f, 0.5f);
                 thumbnailImage.sprite = Sprite.Create(data.Thumbnail, thumbnailRect, thumbnailPivot);
-            }
-            catch {
+            } catch {
                 Debug.LogWarning("Error setting blueprint thumbnail");
             }
         }

@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09514ecf28b230a408a213dce317ddb0, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b97a06f550f0ad4bb81dfdca4af6fdc, type: 3}
   m_Name: ST_DeepSpace
   m_EditorClassIdentifier: 
   id: ST_DeepSpace
-  audioType: 0
+  audioType: 1
   audioClip: {fileID: 8300000, guid: a24bdad56cb0ff9428637a90065c53f8, type: 3}
-  volume: 1
-  pitch: 1
-  allowMultipleOnTrack: 1
-  allowMultipleOfType: 0
+  soundConfig:
+    volume: 1
+    pitch: 1
+    allowMultipleOfType: 1
+    allowMultipleOnTrack: 0
+  atmosphereFilter: 2

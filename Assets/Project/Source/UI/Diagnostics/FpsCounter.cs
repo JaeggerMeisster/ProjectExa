@@ -3,10 +3,8 @@ using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI.Diagnostics
-{
-    public class FpsCounter : MonoBehaviour
-    {
+namespace Exa.UI.Diagnostics {
+    public class FpsCounter : MonoBehaviour {
         [SerializeField] private Text fpsText;
 
         public void Update() {

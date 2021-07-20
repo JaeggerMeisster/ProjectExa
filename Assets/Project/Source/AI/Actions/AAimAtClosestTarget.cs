@@ -1,34 +1,41 @@
-﻿using Exa.Ships;
+﻿using Exa.Grids.Blocks.Components;
+using Exa.Ships;
 using Exa.Ships.Targeting;
 
-namespace Exa.AI.Actions
-{
+namespace Exa.AI.Actions {
     // TODO: Implement a distance difference threshold that prevents already targeted ships from being untargeted too quickly
-    public class AAimAtClosestTarget : ShipAiAction
-    {
-        public override ActionLane Lanes => ActionLane.AimTurrets;
-
-        private Ship enemyTarget = null;
+    public class AAimAtClosestTarget : GridAiAction<GridInstance> {
         private readonly float detectionRadius;
 
-        internal AAimAtClosestTarget(Ship ship, float detectionRadius)
-            : base(ship) {
+        private GridInstance enemyTarget;
+
+        internal AAimAtClosestTarget(GridInstance gridInstance, float detectionRadius)
+            : base(gridInstance) {
             this.detectionRadius = detectionRadius;
+        }
+
+        public override ActionLane Lanes {
+            get => ActionLane.AimTurrets;
         }
 
         public override ActionLane Update(ActionLane blockedLanes) {
             var target = new ShipTarget(enemyTarget);
-            ship.BlockGrid.Metadata.TurretList.SetTarget(target);
+
+            foreach (var turret in grid.BlockGrid.QueryLike<ITurretBehaviour>()) {
+                if (turret.AutoFireEnabled) {
+                    turret.Target = target;
+                }
+            }
 
             return ActionLane.AimTurrets;
         }
 
         protected override float CalculatePriority() {
-            var blockMask = new ShipMask(~ship.BlockContext);
+            var blockMask = (~grid.BlockContext).GetShipMask();
             var closestDistance = float.MaxValue;
 
-            foreach (var enemy in ship.QueryNeighbours(detectionRadius, blockMask, true)) {
-                var distance = (enemy.transform.position - ship.transform.position).magnitude;
+            foreach (var enemy in grid.QueryNeighbours(detectionRadius, blockMask, true)) {
+                var distance = (enemy.transform.position - grid.transform.position).magnitude;
 
                 if (distance < closestDistance) {
                     closestDistance = distance;

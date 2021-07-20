@@ -4,19 +4,13 @@ using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI.Controls
-{
+namespace Exa.UI.Controls {
     [RequireComponent(typeof(Button))]
-    public class DropdownTab : MonoBehaviour
-    {
+    public class DropdownTab : MonoBehaviour {
         public Button button;
 
         [SerializeField] private Text text;
         [SerializeField] private ActivePair<Color> color;
-
-        private void Awake() {
-            Selected = false;
-        }
 
         public string Text {
             set => text.text = value;
@@ -24,6 +18,10 @@ namespace Exa.UI.Controls
 
         public bool Selected {
             set => text.color = color.GetValue(value);
+        }
+
+        private void Awake() {
+            Selected = false;
         }
     }
 }

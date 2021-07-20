@@ -1,14 +1,12 @@
-﻿using Exa.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Exa.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Exa.UI.Tooltips
-{
+namespace Exa.UI.Tooltips {
     [Serializable]
-    public class GroupView : TooltipComponentView<TooltipGroup>
-    {
+    public class GroupView : TooltipComponentView<TooltipGroup> {
         public Transform container;
 
         [SerializeField] private VerticalLayoutGroup verticalLayoutGroup;
@@ -20,12 +18,12 @@ namespace Exa.UI.Tooltips
 
             if (views == null) {
                 views = new List<TooltipComponentView>();
+
                 foreach (var child in value.Children) {
                     views.Add(child.InstantiateComponentView(container));
                 }
-            }
-            else {
-                foreach (var tuple in EnumerableUtils.AsTupleEnumerable(value.Children, views)) {
+            } else {
+                foreach (var tuple in value.Children.AsTupleEnumerable(views)) {
                     tuple.Item2.Refresh(tuple.Item1);
                 }
             }

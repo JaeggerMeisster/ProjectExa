@@ -1,16 +1,23 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 
-namespace Exa.IO.Json
-{
-    public class Vector2IntConverter : JsonConverter<Vector2Int>
-    {
-        public static readonly string[] SEPARATORS = new[] {"(", ", ", ")"};
+namespace Exa.IO.Json {
+    public class Vector2IntConverter : JsonConverter<Vector2Int> {
+        public static readonly string[] SEPARATORS = {
+            "(",
+            ", ",
+            ")"
+        };
 
-        public override Vector2Int ReadJson(JsonReader reader, Type objectType, Vector2Int existingValue,
-            bool hasExistingValue, JsonSerializer serializer) {
+        public override Vector2Int ReadJson(
+            JsonReader reader,
+            Type objectType,
+            Vector2Int existingValue,
+            bool hasExistingValue,
+            JsonSerializer serializer
+        ) {
             var str = (string) reader.Value;
             var vector = str.Split(SEPARATORS, StringSplitOptions.RemoveEmptyEntries);
 

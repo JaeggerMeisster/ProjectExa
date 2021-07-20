@@ -2,17 +2,11 @@
 
 #pragma warning disable CS0649
 
-namespace Exa.Ships
-{
-    public class ShipOverlayCircle : MonoBehaviour
-    {
+namespace Exa.Ships {
+    public class ShipOverlayCircle : MonoBehaviour {
         [SerializeField] private CanvasGroup canvasGroup;
-        private bool isSelected;
         private bool isHovered;
-
-        private void Awake() {
-            CalculateState();
-        }
+        private bool isSelected;
 
         public bool IsSelected {
             private get => isSelected;
@@ -30,13 +24,16 @@ namespace Exa.Ships
             }
         }
 
+        private void Awake() {
+            CalculateState();
+        }
+
         private void CalculateState() {
             gameObject.SetActive(IsSelected || IsHovered);
 
             if (IsSelected) {
                 canvasGroup.alpha = 0.5f;
-            }
-            else if (IsHovered) {
+            } else if (IsHovered) {
                 canvasGroup.alpha = 0.2f;
             }
         }

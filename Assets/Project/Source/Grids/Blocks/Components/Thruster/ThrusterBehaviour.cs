@@ -1,22 +1,20 @@
 ﻿using DG.Tweening;
-using Exa.Generics;
-using Exa.Math;
+using Exa.Ships;
+using Exa.Types.Generics;
 using Exa.Utils;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
 #pragma warning disable CS0649
 
-namespace Exa.Grids.Blocks.Components
-{
-    public class ThrusterBehaviour : BlockBehaviour<ThrusterData>
-    {
-        [Header("References")] 
+namespace Exa.Grids.Blocks.Components {
+    public class ThrusterBehaviour : BlockBehaviour<ThrusterData> {
+        [Header("References")]
         [SerializeField] private Transform thrusterFlameContainer;
         [SerializeField] private SpriteRenderer thrusterFlame;
         [SerializeField] private Light2D light2D;
 
-        [Header("Settings")] 
+        [Header("Settings")]
         [SerializeField] private MinMax<float> xScale;
         [SerializeField] private MinMax<float> yScale;
         [SerializeField] private MinMax<float> lightIntensityScale;
@@ -40,14 +38,11 @@ namespace Exa.Grids.Blocks.Components
         }
 
         protected override void OnAdd() {
-            var blueprintBlock = block.anchoredBlueprintBlock.blueprintBlock;
-            blueprintBlock.SetSpriteRendererFlips(thrusterFlame);
+            (GridInstance as EnemyGrid)?.Navigation.ThrustVectors.Register(this);
+        }
 
-            var pos = thrusterFlameContainer.localPosition.ToVector2().Rotate(-blueprintBlock.Rotation);
-
-            pos *= blueprintBlock.FlipVector;
-
-            thrusterFlameContainer.localPosition = pos.Rotate(blueprintBlock.Rotation);
+        protected override void OnRemove() {
+            (GridInstance as EnemyGrid)?.Navigation.ThrustVectors.Unregister(this);
         }
     }
 }

@@ -2,6 +2,12 @@ fileFormatVersion: 2
 guid: 40a7a8cafa683c5418230d64f3e892f0
 DefaultImporter:
   externalObjects: {}
-  userData: 
+  userData: '{"layers":{"Base":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"Base"},"Turret
+    shape":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"Turret shape"},"Right
+    barrel":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"Right barrel"},"Left
+    barrel":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"Left barrel"},"Right
+    drum":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"Right drum"},"Left
+    drum":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"Left drum"},"Turret
+    details":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"Turret details"}}}'
   assetBundleName: 
   assetBundleVariant: 

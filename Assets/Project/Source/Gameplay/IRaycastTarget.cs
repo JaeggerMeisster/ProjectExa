@@ -1,7 +1,5 @@
-﻿namespace Exa.Gameplay
-{
-    public interface IRaycastTarget
-    {
+﻿namespace Exa.Gameplay {
+    public interface IRaycastTarget {
         void OnRaycastEnter();
 
         void OnRaycastExit();

@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-namespace Exa.UI.Diagnostics
-{
-    public class DiagnosticsPanel : MonoBehaviour
-    { }
+namespace Exa.UI.Diagnostics {
+    public class DiagnosticsPanel : MonoBehaviour { }
 }

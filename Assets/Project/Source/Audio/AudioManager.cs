@@ -1,17 +1,23 @@
 ﻿using System;
-using Exa.Audio.Music;
 using System.Collections.Generic;
+using Exa.Audio.Music;
 using UnityEngine;
 
-namespace Exa.Audio
-{
-    public class AudioManager : MonoBehaviour
-    {
-        public SoundBag soundBag;
-        public MusicTrack ST_AudioTrack;
-        public AudioTrack UI_SFX_AudioTrack;
+namespace Exa.Audio {
+    public class AudioManager : MonoBehaviour {
+        [SerializeField] private SoundBag soundBag;
+        [SerializeField] private MusicPlayerGroup ST_AudioTrack;
+        [SerializeField] private AudioPlayerGroup UI_SFX_AudioTrack;
 
         private readonly Dictionary<string, Sound> soundById = new Dictionary<string, Sound>();
+
+        public MusicPlayerGroup Music {
+            get => ST_AudioTrack;
+        }
+
+        public AudioPlayerGroup Effects {
+            get => UI_SFX_AudioTrack;
+        }
 
         private void Awake() {
             foreach (var sound in soundBag) {
@@ -20,34 +26,34 @@ namespace Exa.Audio
         }
 
         /// <summary>
-        /// Play a sound with the given id
+        ///     Play a sound with the given id
         /// </summary>
         /// <param name="soundId"></param>
         public void PlayGlobal(string soundId) {
             if (!soundById.ContainsKey(soundId)) {
-                UnityEngine.Debug.LogError($"{soundId} doesn't exist");
+                Debug.LogError($"{soundId} doesn't exist");
+
                 return;
             }
 
-            var sound = soundById[soundId];
+            PlayGlobal(soundById[soundId]);
+        }
 
-            GetTrack(sound.audioType).PlayGlobal(sound);
+        public void PlayGlobal(Sound sound) {
+            GetTrack(sound.AudioType).PlayGlobal(sound);
         }
 
         public void Register(Sound sound) {
-            soundById[sound.id] = sound;
-            GetTrack(sound.audioType).Register(sound);
+            soundById[sound.Id] = sound;
+            GetTrack(sound.AudioType).Register(sound);
         }
-        
-        private AudioTrack GetTrack(AudioType audioType)
-        {
-            if (audioType == AudioType.ST)
-                return ST_AudioTrack;
 
-            if (audioType == AudioType.UI_SFX)
-                return UI_SFX_AudioTrack;
-
-            throw new ArgumentException("Invalid audioType given", nameof(audioType));
+        private AudioPlayerGroup GetTrack(AudioType audioType) {
+            return audioType switch {
+                AudioType.ST => ST_AudioTrack,
+                AudioType.UI_SFX => UI_SFX_AudioTrack,
+                _ => throw new ArgumentException("Invalid audioType given", nameof(audioType))
+            };
         }
     }
 }

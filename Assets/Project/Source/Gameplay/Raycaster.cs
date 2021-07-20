@@ -3,10 +3,8 @@ using System.Linq;
 using Exa.Utils;
 using UnityEngine;
 
-namespace Exa.Gameplay
-{
-    public class Raycaster : MonoBehaviour
-    {
+namespace Exa.Gameplay {
+    public class Raycaster : MonoBehaviour {
         private bool isRaycasting = true;
         public IEnumerable<IRaycastTarget> CurrentTargets { get; private set; }
 
@@ -14,34 +12,39 @@ namespace Exa.Gameplay
             private get => isRaycasting;
             set {
                 isRaycasting = value;
-                if (!value)
+
+                if (!value) {
                     ClearTargets();
+                }
+            }
+        }
+
+        public void Update() {
+            if (IsRaycasting) {
+                UpdateRaycastTarget();
             }
         }
 
         public void OnDisable() {
             ClearTargets();
-        } 
-
-        public void Update() {
-            if (IsRaycasting)
-                UpdateRaycastTarget();
         }
 
         public bool TryGetTarget<T>(out T result)
             where T : class {
             if (CurrentTargets == null) {
                 result = null;
+
                 return false;
             }
 
-            result = CurrentTargets.FirstOrDefault(target => target is T) as T;
+            result = CurrentTargets.FindFirst<T>();
+
             return result != null;
         }
 
-        private void UpdateRaycastTarget()
-        {
-            var worldPoint = Systems.Input.MouseWorldPoint;
+        private void UpdateRaycastTarget() {
+            var worldPoint = S.Input.MouseWorldPoint;
+
             var hits = Physics2D.RaycastAll(worldPoint, Vector2.zero)
                 .Select(hit => hit.transform.gameObject.GetComponent<IRaycastTarget>())
                 .Where(hit => hit != null)
@@ -51,22 +54,28 @@ namespace Exa.Gameplay
                 var intersection = hits.Intersect(CurrentTargets)
                     .ToList();
 
-                foreach (var newTarget in hits.Except(intersection))
+                foreach (var newTarget in hits.Except(intersection)) {
                     newTarget.OnRaycastEnter();
+                }
 
-                foreach (var oldTarget in CurrentTargets.Except(intersection))
+                foreach (var oldTarget in CurrentTargets.Except(intersection)) {
                     oldTarget.OnRaycastExit();
+                }
+            } else {
+                foreach (var newTarget in hits) {
+                    newTarget.OnRaycastEnter();
+                }
             }
-            else foreach (var newTarget in hits)
-                newTarget.OnRaycastEnter();
 
             CurrentTargets = hits;
         }
 
         private void ClearTargets() {
-            if (CurrentTargets == null) return;
+            if (CurrentTargets == null) {
+                return;
+            }
 
-            CurrentTargets.Foreach(target => target.OnRaycastExit());
+            CurrentTargets.ForEach(target => target.OnRaycastExit());
             CurrentTargets = null;
         }
     }

@@ -1,7 +1,5 @@
-﻿namespace Exa.Grids.Blueprints
-{
-    public class BlueprintOptions
-    {
+﻿namespace Exa.Grids.Blueprints {
+    public class BlueprintOptions {
         public string name;
         public BlueprintTypeGuid shipClass;
 

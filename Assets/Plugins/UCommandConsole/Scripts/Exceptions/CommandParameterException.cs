@@ -1,11 +1,8 @@
 ﻿using System;
 
-namespace UCommandConsole.Exceptions
-{
-    public class CommandParameterException : ArgumentException
-    {
-        public CommandParameterException()
-            : base() { }
+namespace UCommandConsole.Exceptions {
+    public class CommandParameterException : ArgumentException {
+        public CommandParameterException() { }
 
         public CommandParameterException(string message)
             : base(message) { }
@@ -15,6 +12,7 @@ namespace UCommandConsole.Exceptions
 
         public CommandParameterException(string message, string paramName)
             : base(message, paramName) { }
+
         public CommandParameterException(string message, string paramName, Exception innerException)
             : base(message, paramName, innerException) { }
     }

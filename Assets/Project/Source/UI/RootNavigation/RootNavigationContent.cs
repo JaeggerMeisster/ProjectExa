@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI
-{
-    public class RootNavigationContent : MonoBehaviour
-    {
+namespace Exa.UI {
+    public class RootNavigationContent : MonoBehaviour {
         [SerializeField] private LayoutElement tooltipContainer;
         [SerializeField] private TextAnimator textAnimator;
 

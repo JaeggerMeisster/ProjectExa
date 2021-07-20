@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace Exa.UI
-{
+namespace Exa.UI {
     [RequireComponent(typeof(Hoverable))]
-    public class MenuTooltipTrigger : MonoBehaviour
-    {
+    public class MenuTooltipTrigger : MonoBehaviour {
         public string message;
         public UnityEvent<string> onHover = new UnityEvent<string>();
 

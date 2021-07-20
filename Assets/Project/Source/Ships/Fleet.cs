@@ -4,10 +4,8 @@ using Exa.Grids.Blueprints;
 
 #pragma warning disable CS0649
 
-namespace Exa.Ships
-{
-    public class Fleet : IEnumerable<BlueprintContainer>
-    {
+namespace Exa.Ships {
+    public class Fleet : IEnumerable<BlueprintContainer> {
         public BlueprintContainer mothership;
         public List<BlueprintContainer> units;
 
@@ -18,8 +16,10 @@ namespace Exa.Ships
 
         public IEnumerator<BlueprintContainer> GetEnumerator() {
             yield return mothership;
-            foreach (var unit in units)
+
+            foreach (var unit in units) {
                 yield return unit;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator() {

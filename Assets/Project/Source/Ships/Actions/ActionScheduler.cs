@@ -2,21 +2,19 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Exa.Ships
-{
-    public class ActionScheduler
-    {
-        private readonly Ship ship;
-        private readonly List<ShipAction> shipActions = new List<ShipAction>();
+namespace Exa.Ships {
+    public class ActionScheduler {
         private readonly float generation;
-        private float stored;
+        private readonly GridInstance gridInstance;
+        private readonly List<ShipAction> shipActions = new List<ShipAction>();
         private readonly float storage;
+        private float stored;
 
-        public ActionScheduler(Ship ship) {
-            this.ship = ship;
-            this.generation = 50f;
-            this.stored = 500f;
-            this.storage = 500f;
+        public ActionScheduler(GridInstance gridInstance) {
+            this.gridInstance = gridInstance;
+            generation = 50f;
+            stored = 500f;
+            storage = 500f;
         }
 
         public void Add(ShipAction shipAction) {
@@ -52,11 +50,11 @@ namespace Exa.Ships
                 stored = storage;
             }
 
-            ship.Overlay.overlayEnergyBar.SetFill(stored / storage);
+            gridInstance.Overlay.SetEnergyFill(stored, storage);
         }
 
         /// <summary>
-        /// Tries to take a given amount of energy 
+        ///     Tries to take a given amount of energy
         /// </summary>
         /// <param name="energy"></param>
         /// <returns>The amount of energy taken</returns>
@@ -66,15 +64,16 @@ namespace Exa.Ships
 
         private IEnumerable<ActionCache> SortActions(float deltaTime) {
             return shipActions
-                .Select(action => new ActionCache {
-                    consumption = action.CalculateConsumption(deltaTime),
-                    action = action
-                })
+                .Select(
+                    action => new ActionCache {
+                        consumption = action.CalculateConsumption(deltaTime),
+                        action = action
+                    }
+                )
                 .OrderBy(actionCache => actionCache.consumption);
         }
 
-        private struct ActionCache
-        {
+        private struct ActionCache {
             public float consumption;
             public ShipAction action;
         }

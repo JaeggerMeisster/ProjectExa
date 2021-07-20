@@ -18,14 +18,20 @@ MonoBehaviour:
   thumbnail: {fileID: 816631776277785474, guid: b83defb4a441e484193ddcc29009f684,
     type: 3}
   size: {x: 1, y: 1}
+  metadata:
+    strength: 5
+    blockCosts:
+      creditCost: 70
+      metalsCost: 3
   inertPrefab: {fileID: 3981359817624512356, guid: a036b52ecda087642a569e5bb8c537ca,
     type: 3}
   alivePrefab: {fileID: 37259711147757825, guid: a73af4d5c3260df4eb56f6dfe10585e3,
     type: 3}
-  physicalTemplatePartial:
-    maxHull: 10
-    armor: 0
-    mass: 1
-  powerGeneratorTemplatePartial:
-    peakGeneration:
-      scalar: 0
+  physicalPartial:
+    data:
+      hull: 10
+      armor: 0
+      mass: 1
+  powerGeneratorPartial:
+    data:
+      powerGeneration: 10

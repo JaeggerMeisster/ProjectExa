@@ -3,13 +3,11 @@ using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.Validation
-{
+namespace Exa.Validation {
     /// <summary>
-    /// Validation error view
+    ///     Validation error view
     /// </summary>
-    public class ValidationErrorPanel : MonoBehaviour
-    {
+    public class ValidationErrorPanel : MonoBehaviour {
         [SerializeField] private Text text;
 
         public string Text {

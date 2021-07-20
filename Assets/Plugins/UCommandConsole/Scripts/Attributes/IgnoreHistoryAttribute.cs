@@ -1,10 +1,6 @@
 ﻿using System;
 
-namespace UCommandConsole.Attributes
-{
-
+namespace UCommandConsole.Attributes {
     [AttributeUsage(AttributeTargets.Class)]
-    public class IgnoreHistoryAttribute : Attribute
-    {
-    }
+    public class IgnoreHistoryAttribute : Attribute { }
 }

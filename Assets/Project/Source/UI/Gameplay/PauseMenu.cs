@@ -1,26 +1,20 @@
 ﻿using System;
 using Exa.UI.Components;
 
-namespace Exa.UI.Gameplay
-{
-    public class PauseMenu : Navigateable
-    {
-        public Action continueAction;
+namespace Exa.UI.Gameplay {
+    public class PauseMenu : ReturnNavigateable {
+        public bool Paused { get; private set; }
 
-        public override void HandleEnter(NavigationArgs args)
-        {
-            GameSystems.Raycaster.IsRaycasting = false;
+        public override void HandleEnter(NavigationArgs args) {
+            GS.Raycaster.IsRaycasting = false;
+            Paused = true;
             base.HandleEnter(args);
         }
 
-        public override void HandleExit(Navigateable target)
-        {
-            GameSystems.Raycaster.IsRaycasting = true;
+        public override void HandleExit(Navigateable target) {
+            GS.Raycaster.IsRaycasting = true;
+            Paused = false;
             base.HandleExit(target);
-        }
-
-        public void Continue() {
-            continueAction();
         }
 
         public void Save() {
@@ -32,12 +26,13 @@ namespace Exa.UI.Gameplay
         }
 
         public void QuitToMenu() {
-            GameSystems.Navigateable.NavigateTo(Systems.UI.root.navigateable);
-            Systems.Scenes.UnloadAsync("Game");
+            GS.Navigateable.NavigateTo(S.UI.Root.navigateable);
+            S.Scenes.UnloadAsync("Game");
+            GS.MissionManager.UnloadMission();
         }
 
         public void QuitToDesktop() {
-            Systems.Quit();
+            S.Quit();
         }
     }
 }

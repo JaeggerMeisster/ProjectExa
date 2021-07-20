@@ -1,10 +1,8 @@
 ﻿using Exa.Utils;
 
-namespace Exa.UI.Tooltips
-{
+namespace Exa.UI.Tooltips {
     public abstract class TooltipView<T> : FloatingTooltip
-        where T : ITooltipPresenter
-    {
+        where T : ITooltipPresenter {
         protected Tooltip tooltip;
 
         public GroupView Root { get; set; }
@@ -22,7 +20,7 @@ namespace Exa.UI.Tooltips
         public void Rebuild(T data) {
             itemsContainer.DestroyChildren();
             tooltip = data.GetTooltip();
-            Root = Systems.UI.tooltips.tooltipGenerator.CreateRootView(tooltip, itemsContainer);
+            Root = S.UI.Tooltips.tooltipGenerator.CreateRootView(tooltip, itemsContainer);
             tooltip.ShouldRefresh = false;
         }
     }

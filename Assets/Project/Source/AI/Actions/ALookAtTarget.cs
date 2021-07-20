@@ -1,21 +1,24 @@
 ﻿using Exa.Ships;
 using Exa.Ships.Targeting;
 
-namespace Exa.AI
-{
-    public class ALookAtTarget : ShipAiAction
-    {
-        public override ActionLane Lanes => ActionLane.Rotation;
+namespace Exa.AI {
+    public class ALookAtTarget : GridAiAction<EnemyGrid> {
+        internal ALookAtTarget(EnemyGrid grid)
+            : base(grid) { }
+
+        public override ActionLane Lanes {
+            get => ActionLane.Rotation;
+        }
 
         public ITarget Target { get; set; } = null;
 
-        internal ALookAtTarget(Ship ship)
-            : base(ship) { }
-
         public override ActionLane Update(ActionLane blockedLanes) {
-            if (Target == null) return ActionLane.None;
+            if (Target == null) {
+                return ActionLane.None;
+            }
 
-            ship.Navigation.LookAt = Target;
+            grid.Navigation.LookAt = Target;
+
             return ActionLane.Rotation;
         }
 

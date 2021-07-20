@@ -1,11 +1,8 @@
 ﻿using System;
 
-namespace UCommandConsole.Exceptions
-{
-    public class InputFormatException : Exception
-    {
-        public InputFormatException()
-            : base() { }
+namespace UCommandConsole.Exceptions {
+    public class InputFormatException : Exception {
+        public InputFormatException() { }
 
         public InputFormatException(string message)
             : base(message) { }

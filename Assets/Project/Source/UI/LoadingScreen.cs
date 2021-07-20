@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Collections;
 using DG.Tweening;
-using Exa.Generics;
 using Exa.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI
-{
-    public enum LoadingScreenDuration
-    {
+namespace Exa.UI {
+    public enum LoadingScreenDuration {
         Short,
         Long
     }
 
-    public class LoadingScreen : MonoBehaviour
-    {
+    public class LoadingScreen : MonoBehaviour {
         [Header("References")]
         [SerializeField] private GameObject background;
         [SerializeField] private RectTransform foreground;
@@ -27,16 +23,16 @@ namespace Exa.UI
         [SerializeField] private CanvasGroup wipNoticeGroup;
         [SerializeField] private Text loadingMessage;
 
-        [Header("Options")] 
-        [SerializeField] private bool forceDisplay = false;
-
-        private bool loaded;
-        private float minimumTimeActive;
-        private float timeActive;
-        private bool shouldDisplay;
+        [Header("Options")]
+        [SerializeField] private bool forceDisplay;
 
         private Tween foregroundAlphaTween;
         private Tween foregroundAnchoredPosTween;
+
+        private bool loaded;
+        private float minimumTimeActive;
+        private bool shouldDisplay;
+        private float timeActive;
         private Tween wipNoticeAnchoredPosTween;
 
         public void Init() {
@@ -44,7 +40,9 @@ namespace Exa.UI
         }
 
         public void ShowScreen(LoadingScreenDuration duration) {
-            if (!shouldDisplay) return;
+            if (!shouldDisplay) {
+                return;
+            }
 
             minimumTimeActive = GetDuration(duration);
             timeActive = 0f;
@@ -57,11 +55,16 @@ namespace Exa.UI
             foregroundAnchoredPosTween = SlowSlide(foreground);
 
             wipNoticeGroup.alpha = 0f;
-            this.Delay(() => {
-                wipNoticeGroup.DOFade(1f, 1f);
-                SlideIn(wipNotice)
-                    .OnComplete(() => wipNoticeAnchoredPosTween = SlowSlide(wipNotice));
-            }, 0.5f);
+
+            this.Delay(
+                () => {
+                    wipNoticeGroup.DOFade(1f, 1f);
+
+                    SlideIn(wipNotice)
+                        .OnComplete(() => wipNoticeAnchoredPosTween = SlowSlide(wipNotice));
+                },
+                0.5f
+            );
 
             foregroundGroup.alpha = 0;
             foregroundAlphaTween = foregroundGroup.DOFade(1f, 1f);
@@ -69,8 +72,19 @@ namespace Exa.UI
             StartCoroutine(WaitForDeactivation());
         }
 
+        public void UpdateMessage(string thing, float progress) {
+            UpdateMessage($"Loading {thing} ({Mathf.RoundToInt(progress * 100)}% complete)");
+        }
+
+        // Creates a new progress object that updates the loading screen message when reporting
+        public IProgress<float> GetLoadReporter(string label) {
+            return new Progress<float>(value => { UpdateMessage(label, value); });
+        }
+
         public void UpdateMessage(string message) {
-            if (!shouldDisplay) return;
+            if (!shouldDisplay) {
+                return;
+            }
 
             loadingMessage.gameObject.SetActive(message != "");
             loadingMessage.text = message;
@@ -81,7 +95,9 @@ namespace Exa.UI
         }
 
         public void HideScreen(string message) {
-            if (!shouldDisplay) return;
+            if (!shouldDisplay) {
+                return;
+            }
 
             loaded = true;
             loadingMessage.text = message;
@@ -105,22 +121,28 @@ namespace Exa.UI
 
             foregroundAnchoredPosTween = SlideOut(foreground);
             foregroundAlphaTween = foregroundGroup.DOFade(0f, 1f);
-            this.Delay(() => {
-                foregroundAnchoredPosTween?.Kill();
-                foregroundAlphaTween?.Kill();
-                gameObject.SetActive(false);
-            }, 1f);
+
+            this.Delay(
+                () => {
+                    foregroundAnchoredPosTween?.Kill();
+                    foregroundAlphaTween?.Kill();
+                    gameObject.SetActive(false);
+                },
+                1f
+            );
         }
 
         private Tween SlideIn(RectTransform target) {
             gameObject.SetActive(true);
             target.anchoredPosition = new Vector2(50, 0);
+
             return target.DOAnchorPos(new Vector2(0, 0), 1f)
                 .SetEase(Ease.OutSine);
         }
 
         private Tween SlideOut(RectTransform target) {
             var targetPos = target.anchoredPosition - new Vector2(50, 0);
+
             return target.DOAnchorPos(targetPos, 1f)
                 .SetEase(Ease.InSine);
         }
@@ -130,21 +152,20 @@ namespace Exa.UI
                 .SetEase(Ease.Linear);
         }
 
-        private bool GetShouldDisplay()
-        {
-#if !UNITY_EDITOR
+        private bool GetShouldDisplay() {
+        #if !UNITY_EDITOR
             return true;
-#else
+        #else
             return forceDisplay;
-#endif
+        #endif
         }
 
         private float GetDuration(LoadingScreenDuration duration) {
-            switch (duration) {
-                case LoadingScreenDuration.Long: return 5f;
-                case LoadingScreenDuration.Short: return 2f;
-                default: throw new ArgumentOutOfRangeException(nameof(duration));
-            }
+            return duration switch {
+                LoadingScreenDuration.Long => 5f,
+                LoadingScreenDuration.Short => 2f,
+                _ => throw new ArgumentOutOfRangeException(nameof(duration))
+            };
         }
     }
 }

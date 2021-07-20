@@ -15,4 +15,4 @@ MonoBehaviour:
   typeGuid: 4
   displayName: Worker
   maxSize: {x: 9, y: 7}
-  disallowedBlockCategories: 0
+  allowedBlockCategory: 127

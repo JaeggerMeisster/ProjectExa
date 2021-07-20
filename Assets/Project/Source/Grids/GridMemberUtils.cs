@@ -1,24 +1,20 @@
 ﻿using Exa.Math;
 using UnityEngine;
 
-namespace Exa.Grids
-{
-    public static class GridMemberUtils
-    {
+namespace Exa.Grids {
+    public static class GridMemberUtils {
         public static void SetupGameObject(this IGridMember gridMember, GameObject blockGO) {
             var blueprintBlock = gridMember.BlueprintBlock;
             var gridAnchor = gridMember.GridAnchor;
 
             blockGO.name = $"{blueprintBlock.Template.displayId} {gridAnchor}";
-            var spriteRenderer = blockGO.GetComponent<SpriteRenderer>();
-            gridMember.BlueprintBlock.SetSpriteRendererFlips(spriteRenderer);
-            gridMember.UpdateLocals(blockGO);
+            blockGO.GetComponent<BlockPresenter>().Present(gridMember);
         }
 
         public static void UpdateLocals(this IGridMember gridMember, GameObject blockGO) {
             var blueprintBlock = gridMember.BlueprintBlock;
 
-            blockGO.transform.localRotation = blueprintBlock.QuaternionRotation;
+            blockGO.transform.localRotation = blueprintBlock.GetDirection();
             blockGO.transform.localPosition = gridMember.GetLocalPosition();
         }
 

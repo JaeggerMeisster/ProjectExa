@@ -1,0 +1,486 @@
+fileFormatVersion: 2
+guid: 21df0d4d919c0f94e815d5e9e3bc2d6c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2467314271473265160
+    second: _0
+  - first:
+      213: -7293702687530219678
+    second: _1
+  - first:
+      213: 5465930022627080920
+    second: _2
+  - first:
+      213: 4926910201048525895
+    second: _3
+  - first:
+      213: -5298160333025865069
+    second: _4
+  - first:
+      213: 3419218804046794875
+    second: _5
+  - first:
+      213: -2676912789535806524
+    second: _6
+  - first:
+      213: -7495441581297366054
+    second: _7
+  - first:
+      213: 8695294115065564093
+    second: _8
+  - first:
+      213: 185879130570732872
+    second: _9
+  - first:
+      213: -7309764922532138887
+    second: _10
+  - first:
+      213: 7379336468195929769
+    second: _11
+  - first:
+      213: -4224994282895194646
+    second: _12
+  - first:
+      213: 4340172108464591957
+    second: gauss-cannon-Recovered-turret-arms-base.png_0
+  - first:
+      213: -4456635471540515076
+    second: gauss-cannon-Recovered-turret-arms-base.png_1
+  - first:
+      213: -5870848404286124864
+    second: gauss-cannon-Recovered-turret-arms-base.png_2
+  - first:
+      213: 8760277879850568630
+    second: gauss-cannon-Recovered-turret-arms-base.png_3
+  - first:
+      213: -38919834850011707
+    second: gauss-cannon-Recovered-turret-arms-base.png_4
+  - first:
+      213: -6693144638328242442
+    second: gauss-cannon-Recovered-turret-arms-base.png_5
+  - first:
+      213: -1084014942767629140
+    second: gauss-cannon-Recovered-turret-arms-base.png_6
+  - first:
+      213: -7709500497253398312
+    second: gauss-cannon-Recovered-turret-arms-base.png_7
+  - first:
+      213: -1948745018741033313
+    second: gauss-cannon-Recovered-turret-arms-base.png_8
+  - first:
+      213: -6624701854559934881
+    second: gauss-cannon-Recovered-turret-arms-base.png_9
+  - first:
+      213: -5347689631873408537
+    second: gauss-cannon-Recovered-turret-arms-base.png_10
+  - first:
+      213: -4061706090751755812
+    second: gauss-cannon-Recovered-turret-arms-base.png_11
+  - first:
+      213: -4978439261874194161
+    second: gauss-cannon-Recovered-turret-arms-base.png_12
+  - first:
+      213: 8292338782201942307
+    second: gauss-cannon-Recovered-turret-arms-base_0
+  - first:
+      213: -8312401110649454650
+    second: gauss-cannon-Recovered-turret-arms-base_1
+  - first:
+      213: 6384795995784612319
+    second: gauss-cannon-Recovered-turret-arms-base_2
+  - first:
+      213: -5577196313865894013
+    second: gauss-cannon-Recovered-turret-arms-base_3
+  - first:
+      213: -251156262539725922
+    second: gauss-cannon-Recovered-turret-arms-base_4
+  - first:
+      213: -4545766038254353561
+    second: gauss-cannon-Recovered-turret-arms-base_5
+  - first:
+      213: 6716522372371534033
+    second: gauss-cannon-Recovered-turret-arms-base_6
+  - first:
+      213: 54566368306830677
+    second: gauss-cannon-Recovered-turret-arms-base_7
+  - first:
+      213: 4810025239603148910
+    second: gauss-cannon-Recovered-turret-arms-base_8
+  - first:
+      213: -4192897768419280394
+    second: gauss-cannon-Recovered-turret-arms-base_9
+  - first:
+      213: -8708002160716343105
+    second: gauss-cannon-Recovered-turret-arms-base_10
+  - first:
+      213: 7748698322499606907
+    second: gauss-cannon-Recovered-turret-arms-base_11
+  - first:
+      213: -7196774766403836292
+    second: gauss-cannon-Recovered-turret-arms-base_12
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 100
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-arms-base_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 321975e003e441370800000000000000
+      internalID: 8292338782201942307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-arms-base_1
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cf3d291b3b64ac80800000000000000
+      internalID: -8312401110649454650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-arms-base_2
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd9041c412a5b9850800000000000000
+      internalID: 6384795995784612319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-arms-base_3
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 387c7657081d992b0800000000000000
+      internalID: -5577196313865894013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-arms-base_4
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e93743cb5b6b38cf0800000000000000
+      internalID: -251156262539725922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-arms-base_5
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76380d96fd13ae0c0800000000000000
+      internalID: -4545766038254353561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-arms-base_6
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d05b231381e53d50800000000000000
+      internalID: 6716522372371534033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-arms-base_7
+      rect:
+        serializedVersion: 2
+        x: 2016
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55d9c97a2dbd1c000800000000000000
+      internalID: 54566368306830677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-arms-base_8
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6875378874a0c240800000000000000
+      internalID: 4810025239603148910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-arms-base_9
+      rect:
+        serializedVersion: 2
+        x: 2592
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f937ddc1b5dfc5c0800000000000000
+      internalID: -4192897768419280394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-arms-base_10
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb81b2bfb26f62780800000000000000
+      internalID: -8708002160716343105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-arms-base_11
+      rect:
+        serializedVersion: 2
+        x: 3168
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b791148e118e88b60800000000000000
+      internalID: 7748698322499606907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-arms-base_12
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c762108ea7bef1c90800000000000000
+      internalID: -7196774766403836292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

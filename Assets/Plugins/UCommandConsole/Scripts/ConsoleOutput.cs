@@ -4,18 +4,15 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UCommandConsole
-{
-    public enum OutputColor
-    {
+namespace UCommandConsole {
+    public enum OutputColor {
         normal,
         error,
         warning,
-        accent,
+        accent
     }
 
-    public class ConsoleOutput : MonoBehaviour
-    {
+    public class ConsoleOutput : MonoBehaviour {
         [Header("References")]
         [SerializeField] private Transform outputContent;
         [SerializeField] private GameObject commandOutputContainerPrefab;
@@ -33,38 +30,35 @@ namespace UCommandConsole
 
         [Header("Settings")]
         [SerializeField] private int OutputSize = 100;
-        [SerializeField] private bool dumpExceptionMessage = false;
-        [SerializeField] private bool dumpExceptionStackTrace = false;
-        [SerializeField] private bool dumpInnerException = false;
+        [SerializeField] private bool dumpExceptionMessage;
+        [SerializeField] private bool dumpExceptionStackTrace;
+        [SerializeField] private bool dumpInnerException;
+        private readonly Queue<CommandOutputContainer> outputContainersQueue = new Queue<CommandOutputContainer>();
+        private CommandOutputContainer currentContainer;
 
-        private bool encapsulatingPrintCalls = false;
-        private Queue<CommandOutputContainer> outputContainersQueue = new Queue<CommandOutputContainer>();
-        private CommandOutputContainer currentContainer = null;
+        private bool encapsulatingPrintCalls;
 
-        public void Clear()
-        {
+        public void Clear() {
             currentContainer = null;
-            while (outputContainersQueue.Count != 0)
-            {
+
+            while (outputContainersQueue.Count != 0) {
                 var container = outputContainersQueue.Dequeue();
                 Destroy(container.gameObject);
             }
         }
 
-        public void DumpExceptionLogRecursively(Exception e, int indentationLevel = 1)
-        {
-            if (dumpExceptionMessage)
-            {
+        public void DumpExceptionLogRecursively(Exception e, int indentationLevel = 1) {
+            if (dumpExceptionMessage) {
                 var message = $"Exception Message: {e.Message}";
                 Print(message, indentationLevel, OutputColor.error, true);
             }
-            if (dumpExceptionStackTrace)
-            {
+
+            if (dumpExceptionStackTrace) {
                 var message = $"Exception StackTrace: {e.StackTrace}".Replace("  ", "");
                 Print(message, indentationLevel, OutputColor.error, true);
             }
-            if (dumpInnerException && e.InnerException != null)
-            {
+
+            if (dumpInnerException && e.InnerException != null) {
                 indentationLevel++;
                 var message = "Inner exception:";
                 Print(message, indentationLevel, OutputColor.error, true);
@@ -72,8 +66,7 @@ namespace UCommandConsole
             }
         }
 
-        public void BeginPrint(string name)
-        {
+        public void BeginPrint(string name) {
             encapsulatingPrintCalls = true;
 
             var containerGO = Instantiate(commandOutputContainerPrefab, outputContent);
@@ -85,23 +78,19 @@ namespace UCommandConsole
             currentContainer = container;
             outputContainersQueue.Enqueue(container);
 
-            if (outputContainersQueue.Count > OutputSize)
-            {
+            if (outputContainersQueue.Count > OutputSize) {
                 var oldContainer = outputContainersQueue.Dequeue();
                 Destroy(oldContainer.gameObject);
             }
         }
 
-        public void EndPrint()
-        {
+        public void EndPrint() {
             encapsulatingPrintCalls = false;
             currentContainer = null;
         }
 
-        public void Print(string line, int indentationLevel, Color color)
-        {
-            if (!encapsulatingPrintCalls)
-            {
+        public void Print(string line, int indentationLevel, Color color) {
+            if (!encapsulatingPrintCalls) {
                 throw new Exception("Begin print must be called before any print calls");
             }
 
@@ -112,20 +101,16 @@ namespace UCommandConsole
             outputLine.text.color = color;
         }
 
-        public void Print(string line, int indentationLevel, OutputColor color = OutputColor.normal, bool dark = false)
-        {
+        public void Print(string line, int indentationLevel, OutputColor color = OutputColor.normal, bool dark = false) {
             Print(line, indentationLevel, GetColor(color, dark));
         }
 
-        public void Print(string line, OutputColor color = OutputColor.normal, bool dark = false)
-        {
+        public void Print(string line, OutputColor color = OutputColor.normal, bool dark = false) {
             Print(line, 0, GetColor(color, dark));
         }
 
-        private Color GetColor(OutputColor outputColor, bool dark)
-        {
-            switch (outputColor)
-            {
+        private Color GetColor(OutputColor outputColor, bool dark) {
+            switch (outputColor) {
                 case OutputColor.normal:
                     return dark ? darkDefaultColor : defaultColor;
 

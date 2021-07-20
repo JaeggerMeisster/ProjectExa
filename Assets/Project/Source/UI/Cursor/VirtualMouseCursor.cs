@@ -1,19 +1,17 @@
 ﻿using System;
-using Exa.Utils;
 using DG.Tweening;
 using Exa.Data;
 using Exa.Math;
 using Exa.UI.Tweening;
+using Exa.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI
-{
-    public class VirtualMouseCursor : MonoBehaviour, ICursor
-    {
+namespace Exa.UI {
+    public class VirtualMouseCursor : MonoBehaviour, ICursor {
         [Header("References")]
         [SerializeField] private Image backgroundImage;
         [SerializeField] private CanvasGroup backgroundGroup;
@@ -28,38 +26,32 @@ namespace Exa.UI
         [SerializeField] private Color infoColor;
         [SerializeField] private float cursorColorAnimTime = 0.25f;
 
-        [Header("Size anim settings")] 
+        [Header("Size anim settings")]
         [SerializeField] private float cursorScaleAnimTime = 0.25f;
         [SerializeField] private ActivePair<float> hoverableCursorSize;
         [SerializeField] private ActivePair<CursorSizeAnimSettings> sizeAnimSettings;
 
-        [Header("Drag anim settings")] 
+        [Header("Drag anim settings")]
         [SerializeField] private float cursorDragDistanceTolerance = 30f;
         [SerializeField] private ActivePair<CursorDragAnimSettings> dragAnimSettings;
 
-        [Header("Input")] 
+        [Header("Input")]
         [SerializeField] private InputAction inputAction;
+        private Tween cursorClickAlphaTween;
+        private Tween cursorColorTween;
+        private Tween cursorDragRotateTween;
 
         private CursorDragState cursorDragState = CursorDragState.NotDragging;
-        private CursorState cursorState = CursorState.idle;
-        private Tween cursorColorTween;
-        private Tween cursorClickAlphaTween;
-        private Tween cursorDragRotateTween;
         private FloatTweenBlender cursorScaleBlender;
+        private CursorState cursorState = CursorState.idle;
 
         public Vector2? DragPivot { get; set; }
 
-        public void Init(CursorStateOverrideList overrides) {
-            overrides.ContainsItemChange.AddListener(active => {
-                cursorScaleBlender.To(0, hoverableCursorSize.GetValue(active), cursorScaleAnimTime);
-            });
-
-            inputAction.started += OnLeftMouseStarted;
-            inputAction.canceled += OnLeftMouseCanceled;
-
-            cursorScaleBlender = new FloatTweenBlender(1f,
-                value => rectTransform.localScale = new Vector3(value, value, 1),
-                (current, blender) => current * blender);
+        private void Update() {
+            var viewportPoint = S.Input.MouseScaledViewportPoint;
+            rectTransform.anchoredPosition = viewportPoint;
+            cursorScaleBlender.Update();
+            UpdateCursorScaleAnim(viewportPoint);
         }
 
         private void OnEnable() {
@@ -68,29 +60,6 @@ namespace Exa.UI
 
         private void OnDisable() {
             inputAction.Disable();
-        }
-
-        private void Update() {
-            var viewportPoint = Systems.Input.ScaledViewportPoint;
-            rectTransform.anchoredPosition = viewportPoint;
-            cursorScaleBlender.Update();
-            UpdateCursorScaleAnim(viewportPoint);
-        }
-
-        private void UpdateCursorScaleAnim(Vector2 viewportPoint) {
-            if (!DragPivot.HasValue || cursorDragState == CursorDragState.NotDragging)
-                return;
-
-            var difference = DragPivot.Value - viewportPoint;
-
-
-            if (cursorDragState == CursorDragState.BeginDragging && difference.magnitude > cursorDragDistanceTolerance)
-                cursorDragState = CursorDragState.Dragging;
-
-            if (cursorDragState == CursorDragState.Dragging) {
-                var angle = (difference.GetAngle() + 270f - 22.5f) % 360;
-                AnimCursorDirection(angle, dragAnimSettings.active);
-            }
         }
 
         public void SetActive(bool active) {
@@ -116,10 +85,40 @@ namespace Exa.UI
             Cursor.visible = true;
         }
 
+        public void Init(CursorStateOverrideList overrides) {
+            overrides.ContainsItemChange.AddListener(active => { cursorScaleBlender.To(0, hoverableCursorSize.GetValue(active), cursorScaleAnimTime); });
+
+            inputAction.started += OnLeftMouseStarted;
+            inputAction.canceled += OnLeftMouseCanceled;
+
+            cursorScaleBlender = new FloatTweenBlender(
+                1f,
+                value => rectTransform.localScale = new Vector3(value, value, 1),
+                (current, blender) => current * blender
+            );
+        }
+
+        private void UpdateCursorScaleAnim(Vector2 viewportPoint) {
+            if (!DragPivot.HasValue || cursorDragState == CursorDragState.NotDragging) {
+                return;
+            }
+
+            var difference = DragPivot.Value - viewportPoint;
+
+            if (cursorDragState == CursorDragState.BeginDragging && difference.magnitude > cursorDragDistanceTolerance) {
+                cursorDragState = CursorDragState.Dragging;
+            }
+
+            if (cursorDragState == CursorDragState.Dragging) {
+                var angle = (difference.GetAngle() + 270f - 22.5f) % 360;
+                AnimCursorDirection(angle, dragAnimSettings.active);
+            }
+        }
+
         private void OnLeftMouseStarted(InputAction.CallbackContext context) {
             AnimCursorSize(sizeAnimSettings.active);
             cursorDragState = CursorDragState.BeginDragging;
-            DragPivot = Systems.Input.ScaledViewportPoint;
+            DragPivot = S.Input.MouseScaledViewportPoint;
         }
 
         private void OnLeftMouseCanceled(InputAction.CallbackContext context) {
@@ -140,6 +139,7 @@ namespace Exa.UI
 
         private void AnimCursorDirection(float angle, CursorDragAnimSettings args) {
             var targetVector = new Vector3(0, 0, angle);
+
             normalCursor.DORotate(targetVector, args.animTime)
                 .SetEase(args.ease)
                 .Replace(ref cursorDragRotateTween);
@@ -152,10 +152,12 @@ namespace Exa.UI
                 case CursorState.remove:
                 case CursorState.info:
                     normalCursor.gameObject.SetActive(active);
+
                     break;
 
                 case CursorState.input:
                     inputCursor.gameObject.SetActive(active);
+
                     break;
             }
         }
@@ -176,8 +178,7 @@ namespace Exa.UI
         }
 
         [Serializable]
-        private struct CursorSizeAnimSettings
-        {
+        private struct CursorSizeAnimSettings {
             public float sizeTarget;
             public float alphaTarget;
             public float animTime;
@@ -185,14 +186,12 @@ namespace Exa.UI
         }
 
         [Serializable]
-        private struct CursorDragAnimSettings
-        {
+        private struct CursorDragAnimSettings {
             public float animTime;
             public ExaEase ease;
         }
 
-        private enum CursorDragState
-        {
+        private enum CursorDragState {
             NotDragging,
             BeginDragging,
             Dragging

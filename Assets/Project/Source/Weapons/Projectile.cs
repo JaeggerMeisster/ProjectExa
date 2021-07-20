@@ -1,33 +1,21 @@
-﻿using Exa.Grids;
-using Exa.Grids.Blocks;
-using Exa.Grids.Blocks.BlockTypes;
-using Exa.Grids.Blocks.Components;
-using Exa.Math;
-using Exa.Ships;
+﻿using Exa.Grids.Blocks;
 using UnityEngine;
 
-namespace Exa.Weapons
-{
-    public class Projectile : MonoBehaviour
-    {
+namespace Exa.Weapons {
+    /// <summary>
+    /// Basic penetrative projectile
+    /// Projectile is destroyed once the projectile goes beyond its range, or once it has dealt its full potential damage
+    /// </summary>
+    public class Projectile : MonoBehaviour {
         [SerializeField] private Rigidbody2D rb;
-        private float damage;
-        private float lifeTime;
+        private Damage damage;
         private BlockContext damageMask;
+        private float lifeTime;
         private float timeAlive;
-        private object damageSource;
-
-        public void Setup(Transform transform, float speed, float range, float damage, object damageSource, BlockContext damageMask) {
-            this.transform.position = transform.position;
-            this.damage = damage;
-            this.lifeTime = range / speed;
-            this.damageSource = damageSource;
-            this.damageMask = damageMask;
-
-            rb.velocity = transform.right * speed;
-        }
 
         public void Update() {
+            // Instead of tracking the distance from the spawn position for range logic,
+            // count the time the projectile is alive and compare it to its projected lifetime
             var deltaTime = Time.deltaTime;
             timeAlive += deltaTime;
 
@@ -37,28 +25,38 @@ namespace Exa.Weapons
         }
 
         public void OnTriggerEnter2D(Collider2D collider) {
-            var block = collider.gameObject.GetComponent<Block>();
-            if (!block) {
-                Debug.LogError($"Collided with {collider.gameObject}, but found no block attached");
+            var damageable = collider.GetComponent<IDamageable>();
+
+            if (!damageable.PassesDamageMask(damageMask)) {
                 return;
             }
-            if (!PassesDamageMask(block)) return;
 
-            var damageInstanceData = block.PhysicalBehaviour.AbsorbDamage(damageSource, damage);
-            damage -= damageInstanceData.absorbedDamage;
+            // Get the absorbed points of damage of the damageable, subtract from the pooled amount of damage
+            damage.value -= damageable.TakeDamage(damage).absorbedDamage;
 
-            if (damage <= 0f) {
+            // Once the pooled damage is below 0, destroy the projectile
+            if (damage.value <= 0f) {
                 Destroy(gameObject);
             }
         }
 
-        private bool PassesDamageMask(Block block) {
-            if (block.Parent == null) {
-                Debug.LogError($"Block {block.GetInstanceID()} has no parent");
-                return false;
-            }
+        // TODO: Set rotation of the projectile
+        /// <summary>
+        /// Set initial properties of the projectile
+        /// </summary>
+        /// <param name="spawnPoint">Transform of the firing point for the projectile.
+        /// Position and heading are inherited from the spawn point</param>
+        /// <param name="speed">Units per second the projectile should be traveling at</param>
+        /// <param name="range">Amount of units the projectile before it is destroyed</param>
+        /// <param name="damage">Damage to apply when hitting damageable that pass the damage mask</param>
+        /// <param name="damageMask">BlockContext filter to apply when hitting damageables</param>
+        public void Setup(Transform spawnPoint, float speed, float range, Damage damage, BlockContext damageMask) {
+            transform.position = spawnPoint.position;
+            lifeTime = range / speed;
+            this.damage = damage;
+            this.damageMask = damageMask;
 
-            return (block.Parent.BlockContext & damageMask) != 0;
+            rb.velocity = spawnPoint.right * speed;
         }
     }
 }

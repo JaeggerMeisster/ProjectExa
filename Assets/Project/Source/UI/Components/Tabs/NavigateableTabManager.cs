@@ -2,34 +2,37 @@
 
 #pragma warning disable CS0649
 
-namespace Exa.UI.Components
-{
+namespace Exa.UI.Components {
     // TODO: Hide tooltip when not hovering over a tab button
-    public class NavigateableTabManager : MonoBehaviour
-    {
+    public class NavigateableTabManager : MonoBehaviour {
         [SerializeField] private Navigateable defaultTab;
-        private Navigateable activeTab;
 
-        public Navigateable ActiveTab => activeTab;
+        public Navigateable ActiveTab { get; private set; }
 
         private void Start() {
-            if (defaultTab != null)
+            if (defaultTab != null) {
                 SetDefaultActive(defaultTab);
+            }
         }
 
         public void SetDefaultActive(Navigateable tab) {
-            activeTab = tab;
-            activeTab.HandleEnter(null);
+            ActiveTab = tab;
+            ActiveTab.HandleEnter(null);
         }
 
         public void SwitchTo(Navigateable newTab) {
-            if (newTab == activeTab) return;
+            if (newTab == ActiveTab) {
+                return;
+            }
 
-            activeTab.NavigateTo(newTab, new NavigationArgs {
-                current = activeTab
-            });
+            ActiveTab.NavigateTo(
+                newTab,
+                new NavigationArgs {
+                    current = ActiveTab
+                }
+            );
 
-            activeTab = newTab;
+            ActiveTab = newTab;
         }
     }
 }

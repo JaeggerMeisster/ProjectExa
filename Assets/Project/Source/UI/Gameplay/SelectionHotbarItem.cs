@@ -4,28 +4,18 @@ using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI.Gameplay
-{
-    public class SelectionHotbarItem : MonoBehaviour
-    {
+namespace Exa.UI.Gameplay {
+    public class SelectionHotbarItem : MonoBehaviour {
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private Text text;
         [SerializeField] private Color inactiveColor;
         [SerializeField] private Color activeColor;
         [SerializeField] private Color emptyColor;
-        private ShipSelection shipSelection;
         private bool selected;
+        private ShipSelection shipSelection;
 
-        public bool HasShipSelection => shipSelection != null && shipSelection.Count > 0;
-
-        private void Awake() {
-            selected = false;
-
-            UpdateView();
-        }
-
-        public void Setup(int index) {
-            text.text = index.ToString();
+        public bool HasShipSelection {
+            get => shipSelection != null && shipSelection.Count > 0;
         }
 
         public ShipSelection ShipSelection {
@@ -42,6 +32,16 @@ namespace Exa.UI.Gameplay
                 selected = value;
                 UpdateView();
             }
+        }
+
+        private void Awake() {
+            selected = false;
+
+            UpdateView();
+        }
+
+        public void Setup(int index) {
+            text.text = index.ToString();
         }
 
         private void UpdateView() {

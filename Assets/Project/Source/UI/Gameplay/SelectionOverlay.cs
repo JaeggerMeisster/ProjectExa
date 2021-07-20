@@ -1,16 +1,14 @@
-﻿using Exa.Bindings;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Exa.Gameplay;
 using Exa.Ships;
-using System.Collections.Generic;
-using System.Linq;
+using Exa.Types.Binding;
 using UnityEngine;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI.Gameplay
-{
-    public class SelectionOverlay : AbstractCollectionObserver<Ship>
-    {
+namespace Exa.UI.Gameplay {
+    public class SelectionOverlay : AbstractCollectionObserver<GridInstance> {
         [SerializeField] private GameObject shipViewPrefab;
         [SerializeField] private Transform container;
 
@@ -20,13 +18,13 @@ namespace Exa.UI.Gameplay
             container.gameObject.SetActive(false);
         }
 
-        public override void OnAdd(Ship value) {
+        public override void OnAdd(GridInstance value) {
             var view = SelectOrCreateView(value);
             view.Add(value);
             ProcessEnabled();
         }
 
-        public override void OnRemove(Ship value) {
+        public override void OnRemove(GridInstance value) {
             var key = value.Blueprint.name;
             var view = shipViews[key];
 
@@ -51,22 +49,23 @@ namespace Exa.UI.Gameplay
         }
 
         public void Reflect(ShipSelection shipSelection) {
-            this.Source = shipSelection;
+            Source = shipSelection;
             ProcessEnabled();
         }
 
-        private ShipView SelectOrCreateView(Ship ship) {
-            var key = ship.Blueprint.name;
+        private ShipView SelectOrCreateView(GridInstance gridInstance) {
+            var key = gridInstance.Blueprint.name;
+
             if (!shipViews.ContainsKey(key)) {
                 var viewGO = Instantiate(shipViewPrefab, container);
                 var view = viewGO.GetComponent<ShipView>();
-                view.SetThumbnail(ship.Blueprint.Thumbnail);
+                view.SetThumbnail(gridInstance.Blueprint.Thumbnail);
                 shipViews.Add(key, view);
+
                 return view;
             }
-            else {
-                return shipViews[key];
-            }
+
+            return shipViews[key];
         }
 
         private void ProcessEnabled() {

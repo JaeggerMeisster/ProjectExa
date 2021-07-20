@@ -106,6 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5057754596078983127}
   - component: {fileID: 5057754596078983126}
+  - component: {fileID: 6836051545665117590}
   m_Layer: 0
   m_Name: BlockFactory
   m_TagString: Untagged
@@ -143,11 +144,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2442101be11c2b488c13d2d07262d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalsManager: {fileID: 6836051545665117590}
   blockTemplateBag: {fileID: 11400000, guid: 81f5adcca85f42c42b5aea3d09f0b99c, type: 2}
   inertPrefabGroup: {fileID: 3938496695803358877}
   defaultPrefabGroup: {fileID: 1587025755745182148}
   userPrefabGroup: {fileID: 2465793233296236832}
   enemyPrefabGroup: {fileID: 304371978879303954}
+--- !u!114 &6836051545665117590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5057754596078983129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff703281f8ef47f7bee2b1beeac323e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6029322592615761839
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,28 +1,29 @@
 ﻿using System;
 using DG.Tweening;
 
-namespace Exa.UI.Tweening
-{
-    public abstract class TweenRef<T>
-    {
-        private Tween tween;
+namespace Exa.UI.Tweening {
+    public abstract class TweenRef<T> {
         private float? defaultDuration;
 
-        public Tween Tween => tween;
+        public Tween Tween { get; private set; }
 
         public Tween To(T endValue) {
-            return To(endValue,
-                defaultDuration ?? throw new InvalidOperationException("A default duration must be set"));
+            return To(
+                endValue,
+                defaultDuration ?? throw new InvalidOperationException("A default duration must be set")
+            );
         }
 
         public Tween To(T endValue, float time) {
-            tween?.Kill();
-            tween = CreateTween(endValue, time);
-            return tween;
+            Tween?.Kill();
+            Tween = CreateTween(endValue, time);
+
+            return Tween;
         }
 
         public TweenRef<T> SetDuration(float duration) {
-            this.defaultDuration = duration;
+            defaultDuration = duration;
+
             return this;
         }
 

@@ -1,165 +1,167 @@
 ﻿// Author: Daniele Giardini - http://www.demigiant.com
 // Created: 2018/07/13
 
+using System;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Core.PathCore;
 using DG.Tweening.Plugins.Options;
-using System;
-using System.Reflection;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 #pragma warning disable 1591
 
-namespace DG.Tweening
-{
+namespace DG.Tweening {
     /// <summary>
-    /// Utility functions that deal with available Modules.
-    /// Modules defines:
-    /// - DOTAUDIO
-    /// - DOTPHYSICS
-    /// - DOTPHYSICS2D
-    /// - DOTSPRITE
-    /// - DOTUI
-    /// Extra defines set and used for implementation of external assets:
-    /// - DOTWEEN_TMP ► TextMesh Pro
-    /// - DOTWEEN_TK2D ► 2D Toolkit
+    ///     Utility functions that deal with available Modules.
+    ///     Modules defines:
+    ///     - DOTAUDIO
+    ///     - DOTPHYSICS
+    ///     - DOTPHYSICS2D
+    ///     - DOTSPRITE
+    ///     - DOTUI
+    ///     Extra defines set and used for implementation of external assets:
+    ///     - DOTWEEN_TMP ► TextMesh Pro
+    ///     - DOTWEEN_TK2D ► 2D Toolkit
     /// </summary>
-	public static class DOTweenModuleUtils
-    {
+    public static class DOTweenModuleUtils {
         private static bool _initialized;
 
-        #region Reflection
+    #region Reflection
 
         /// <summary>
-        /// Called via Reflection by DOTweenComponent on Awake
+        ///     Called via Reflection by DOTweenComponent on Awake
         /// </summary>
-#if UNITY_2018_1_OR_NEWER
-
-        [UnityEngine.Scripting.Preserve]
-#endif
-        public static void Init()
-        {
-            if (_initialized) return;
+    #if UNITY_2018_1_OR_NEWER
+        [Preserve]
+    #endif
+        public static void Init() {
+            if (_initialized) {
+                return;
+            }
 
             _initialized = true;
             DOTweenExternalCommand.SetOrientationOnPath += Physics.SetOrientationOnPath;
 
-#if UNITY_EDITOR
-#if UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5 || UNITY_2017_1
+        #if UNITY_EDITOR
+        #if UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5 || UNITY_2017_1
             UnityEditor.EditorApplication.playmodeStateChanged += PlaymodeStateChanged;
-#else
-            UnityEditor.EditorApplication.playModeStateChanged += PlaymodeStateChanged;
-#endif
-#endif
+        #else
+            EditorApplication.playModeStateChanged += PlaymodeStateChanged;
+        #endif
+        #endif
         }
 
-#if UNITY_2018_1_OR_NEWER
-#pragma warning disable
+    #if UNITY_2018_1_OR_NEWER
+    #pragma warning disable
 
-        [UnityEngine.Scripting.Preserve]
-        private static void Preserver()
-        {
-            Assembly[] loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
-            MethodInfo mi = typeof(MonoBehaviour).GetMethod("Stub");
+        [Preserve]
+        private static void Preserver() {
+            var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var mi = typeof(MonoBehaviour).GetMethod("Stub");
         }
 
-#pragma warning restore
-#endif
+    #pragma warning restore
+    #endif
 
-        #endregion Reflection
+    #endregion Reflection
 
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
         // Fires OnApplicationPause in DOTweenComponent even when Editor is paused (otherwise it's only fired at runtime)
-#if UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5 || UNITY_2017_1
+    #if UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_5 || UNITY_2017_1
         static void PlaymodeStateChanged()
-#else
+    #else
 
-        private static void PlaymodeStateChanged(UnityEditor.PlayModeStateChange state)
-#endif
+        private static void PlaymodeStateChanged(PlayModeStateChange state)
+    #endif
         {
-            if (DOTween.instance == null) return;
-            DOTween.instance.OnApplicationPause(UnityEditor.EditorApplication.isPaused);
+            if (DOTween.instance == null) {
+                return;
+            }
+
+            DOTween.instance.OnApplicationPause(EditorApplication.isPaused);
         }
 
-#endif
+    #endif
 
         // █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
         // ███ INTERNAL CLASSES ████████████████████████████████████████████████████████████████████████████████████████████████
         // █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 
-        public static class Physics
-        {
+        public static class Physics {
             // Called via DOTweenExternalCommand callback
-            public static void SetOrientationOnPath(PathOptions options, Tween t, Quaternion newRot, Transform trans)
-            {
-#if true // PHYSICS_MARKER
-                if (options.isRigidbody) ((Rigidbody)t.target).rotation = newRot;
-                else trans.rotation = newRot;
-#else
+            public static void SetOrientationOnPath(PathOptions options, Tween t, Quaternion newRot, Transform trans) {
+            #if true // PHYSICS_MARKER
+                if (options.isRigidbody) {
+                    ((Rigidbody) t.target).rotation = newRot;
+                } else {
+                    trans.rotation = newRot;
+                }
+            #else
                 trans.rotation = newRot;
-#endif
+            #endif
             }
 
             // Returns FALSE if the DOTween's Physics2D Module is disabled, or if there's no Rigidbody2D attached
-            public static bool HasRigidbody2D(Component target)
-            {
-#if true // PHYSICS2D_MARKER
+            public static bool HasRigidbody2D(Component target) {
+            #if true // PHYSICS2D_MARKER
                 return target.GetComponent<Rigidbody2D>() != null;
-#else
+            #else
                 return false;
-#endif
+            #endif
             }
 
-            #region Called via Reflection
+        #region Called via Reflection
 
             // Called via Reflection by DOTweenPathInspector
             // Returns FALSE if the DOTween's Physics Module is disabled, or if there's no rigidbody attached
-#if UNITY_2018_1_OR_NEWER
+        #if UNITY_2018_1_OR_NEWER
 
-            [UnityEngine.Scripting.Preserve]
-#endif
-            public static bool HasRigidbody(Component target)
-            {
-#if true // PHYSICS_MARKER
+            [Preserve]
+        #endif
+            public static bool HasRigidbody(Component target) {
+            #if true // PHYSICS_MARKER
                 return target.GetComponent<Rigidbody>() != null;
-#else
+            #else
                 return false;
-#endif
+            #endif
             }
 
             // Called via Reflection by DOTweenPath
-#if UNITY_2018_1_OR_NEWER
+        #if UNITY_2018_1_OR_NEWER
 
-            [UnityEngine.Scripting.Preserve]
-#endif
+            [Preserve]
+        #endif
             public static TweenerCore<Vector3, Path, PathOptions> CreateDOTweenPathTween(
-                MonoBehaviour target, bool tweenRigidbody, bool isLocal, Path path, float duration, PathMode pathMode
-            )
-            {
+                MonoBehaviour target,
+                bool tweenRigidbody,
+                bool isLocal,
+                Path path,
+                float duration,
+                PathMode pathMode
+            ) {
                 TweenerCore<Vector3, Path, PathOptions> t;
-#if true // PHYSICS_MARKER
-                Rigidbody rBody = tweenRigidbody ? target.GetComponent<Rigidbody>() : null;
-                if (tweenRigidbody && rBody != null)
-                {
+            #if true // PHYSICS_MARKER
+                var rBody = tweenRigidbody ? target.GetComponent<Rigidbody>() : null;
+
+                if (tweenRigidbody && rBody != null) {
                     t = isLocal
                         ? rBody.DOLocalPath(path, duration, pathMode)
                         : rBody.DOPath(path, duration, pathMode);
-                }
-                else
-                {
+                } else {
                     t = isLocal
                         ? target.transform.DOLocalPath(path, duration, pathMode)
                         : target.transform.DOPath(path, duration, pathMode);
                 }
-#else
+            #else
                 t = isLocal
                     ? target.transform.DOLocalPath(path, duration, pathMode)
                     : target.transform.DOPath(path, duration, pathMode);
-#endif
+            #endif
                 return t;
             }
 
-            #endregion Called via Reflection
+        #endregion Called via Reflection
         }
     }
 }

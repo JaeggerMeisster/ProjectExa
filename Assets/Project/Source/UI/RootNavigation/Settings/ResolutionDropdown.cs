@@ -1,11 +1,9 @@
-﻿using Exa.UI.Controls;
-using System.Linq;
+﻿using System.Linq;
+using Exa.UI.Controls;
 using UnityEngine;
 
-namespace Exa.UI.Settings
-{
-    public class ResolutionDropdown : DropdownControl
-    {
+namespace Exa.UI.Settings {
+    public class ResolutionDropdown : DropdownControl {
         public void FilterByRefreshRate(int refreshRate) {
             foreach (var value in stateContainer) {
                 var resolution = (Resolution) value;

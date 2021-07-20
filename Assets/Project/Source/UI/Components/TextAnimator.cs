@@ -7,17 +7,15 @@ using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI
-{
-    public class TextAnimator : MonoBehaviour
-    {
+namespace Exa.UI {
+    public class TextAnimator : MonoBehaviour {
         [SerializeField] private float charTime;
         [SerializeField] private Text text;
         [SerializeField] private bool animateOnEnable = true;
-        [SerializeField] private float animateOnEnableDelay = 0f;
+        [SerializeField] private float animateOnEnableDelay;
+        private bool animating;
         private float startTime;
         private SignificantCharStringReader stringReader;
-        private bool animating;
 
         public float CharTime {
             get => charTime;
@@ -28,8 +26,35 @@ namespace Exa.UI
             text = text ?? GetComponent<Text>();
         }
 
+        public void Update() {
+            if (!animating) {
+                return;
+            }
+
+            var timeSinceStart = Time.time - startTime;
+            var charIndex = Mathf.FloorToInt(timeSinceStart / charTime);
+
+            try {
+                var targetString = stringReader.GetStringToSignificantIndex(charIndex);
+
+                if (targetString == stringReader.Str) {
+                    text.text = stringReader.Str;
+                    animating = false;
+
+                    return;
+                }
+
+                text.text = (targetString + StringExtensions.GetRandomChar()).PadRight(stringReader.Str.Length);
+            } catch (IndexOutOfRangeException) {
+                text.text = stringReader.Str;
+                animating = false;
+            }
+        }
+
         public void OnEnable() {
-            if (!animateOnEnable) return;
+            if (!animateOnEnable) {
+                return;
+            }
 
             var enumerator = EnumeratorUtils.Delay(() => AnimateTo(text.text), animateOnEnableDelay);
             StartCoroutine(enumerator);
@@ -42,40 +67,16 @@ namespace Exa.UI
             stringReader = new SignificantCharStringReader(str);
         }
 
-        public void Update() {
-            if (!animating) return;
-
-            var timeSinceStart = Time.time - startTime;
-            var charIndex = Mathf.FloorToInt(timeSinceStart / charTime);
-
-            try {
-                var targetString = stringReader.GetStringToSignificantIndex(charIndex);
-
-                if (targetString == stringReader.Str) {
-                    text.text = stringReader.Str;
-                    animating = false;
-                    return;
-                }
-
-                text.text = (targetString + StringExtensions.GetRandomChar()).PadRight(stringReader.Str.Length);
-            }
-            catch (IndexOutOfRangeException) {
-                text.text = stringReader.Str;
-                animating = false;
-            }
-        }
-
-        public class SignificantCharStringReader
-        {
-            public int SignificantSize { get; private set; }
-            public string Str { get; private set; }
+        public class SignificantCharStringReader {
             private Dictionary<int, int> indices;
 
-
             public SignificantCharStringReader(string str) {
-                this.Str = str;
+                Str = str;
                 BuildIndices();
             }
+
+            public int SignificantSize { get; private set; }
+            public string Str { get; }
 
             public string GetStringToSignificantIndex(int index) {
                 if (index < 0 || index >= SignificantSize) {
@@ -95,9 +96,13 @@ namespace Exa.UI
             private void BuildIndices() {
                 indices = new Dictionary<int, int>(Str.Length);
                 var significantIndex = 0;
+
                 for (var i = 0; i < Str.Length; i++) {
                     var currentChar = Str[i];
-                    if (currentChar == ' ' || currentChar == '\t') continue;
+
+                    if (currentChar == ' ' || currentChar == '\t') {
+                        continue;
+                    }
 
                     indices[significantIndex] = i;
                     significantIndex++;

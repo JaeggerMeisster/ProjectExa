@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3971752618548431354}
   - component: {fileID: 3971752618548431353}
-  - component: {fileID: 3971752618548431335}
   - component: {fileID: 1150010444763719143}
-  - component: {fileID: 8802424649209492626}
   - component: {fileID: 4286009776099489547}
+  - component: {fileID: 4769013451734808969}
   m_Layer: 0
   m_Name: GameSystems
   m_TagString: Untagged
@@ -48,26 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3304b620dfa6b4dabc0b9f2596f496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameplayInputManager: {fileID: 3971752618548431335}
-  cameraController: {fileID: 8802424649209492626}
+  gameplayInputManager: {fileID: 0}
   raycaster: {fileID: 1556863573202206212}
   navigateable: {fileID: 0}
   shipFactory: {fileID: 0}
   gameplayUI: {fileID: 0}
   aIManager: {fileID: 0}
   spawnLayer: {fileID: 4286009776099489547}
---- !u!114 &3971752618548431335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3971752618548431355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7f44cf94082cf041bfb5bb402f2d68c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  blockGridManager: {fileID: 0}
+  popupManager: {fileID: 0}
+  missionManager: {fileID: 4769013451734808969}
 --- !u!114 &1150010444763719143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,29 +70,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ticksPerSecond: 10
---- !u!114 &8802424649209492626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3971752618548431355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a9bd967442da4e4b89ad43d9ccf7b49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultSettings:
-    bezierCurveSettings:
-      p0: {x: 0, y: 0}
-      p1: {x: 0.5, y: 0.25}
-      p2: {x: 0.5, y: 0.75}
-      p3: {x: 1, y: 1}
-    zoomMinMax:
-      min: 0.1
-      max: 2.5
-    zoomSpeed: 0.3
-    orthoMultiplier: 30
 --- !u!114 &4286009776099489547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,8 +82,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b7490757e9d9f49b6adbcdc1d796f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overlay: {fileID: 0}
   projectiles: {fileID: 0}
   ships: {fileID: 0}
+--- !u!114 &4769013451734808969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3971752618548431355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1af965eb9df5418c9acd8a39b28c963f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6801628535618871680
 GameObject:
   m_ObjectHideFlags: 0

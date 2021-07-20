@@ -3,10 +3,8 @@ using Exa.UI.Components;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Exa.UI
-{
-    public class BlueprintTypeTabContent : AnimatedTabContent
-    {
+namespace Exa.UI {
+    public class BlueprintTypeTabContent : AnimatedTabContent {
         public Transform container;
         [SerializeField] private Text emptyContentNotice;
         private int childCount;
@@ -15,8 +13,10 @@ namespace Exa.UI
             get => childCount;
             set {
                 var targetState = value == 0;
-                if (emptyContentNotice.gameObject.activeSelf != targetState)
+
+                if (emptyContentNotice.gameObject.activeSelf != targetState) {
                     emptyContentNotice.gameObject.SetActive(targetState);
+                }
 
                 childCount = value;
             }

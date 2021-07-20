@@ -1,0 +1,486 @@
+fileFormatVersion: 2
+guid: 4a890d13bcb4192488f3d0c7a3733b2f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2467314271473265160
+    second: _0
+  - first:
+      213: -7293702687530219678
+    second: _1
+  - first:
+      213: 5465930022627080920
+    second: _2
+  - first:
+      213: 4926910201048525895
+    second: _3
+  - first:
+      213: -5298160333025865069
+    second: _4
+  - first:
+      213: 3419218804046794875
+    second: _5
+  - first:
+      213: -2676912789535806524
+    second: _6
+  - first:
+      213: -7495441581297366054
+    second: _7
+  - first:
+      213: 8695294115065564093
+    second: _8
+  - first:
+      213: 185879130570732872
+    second: _9
+  - first:
+      213: -7309764922532138887
+    second: _10
+  - first:
+      213: 7379336468195929769
+    second: _11
+  - first:
+      213: -4224994282895194646
+    second: _12
+  - first:
+      213: 2473037791366733963
+    second: gauss-cannon-Recovered-turret-coils-internal.png_0
+  - first:
+      213: -1200051504419771057
+    second: gauss-cannon-Recovered-turret-coils-internal.png_1
+  - first:
+      213: 9106731380997008169
+    second: gauss-cannon-Recovered-turret-coils-internal.png_2
+  - first:
+      213: -9083022478611126221
+    second: gauss-cannon-Recovered-turret-coils-internal.png_3
+  - first:
+      213: -3281144814824029207
+    second: gauss-cannon-Recovered-turret-coils-internal.png_4
+  - first:
+      213: 3690816491693978950
+    second: gauss-cannon-Recovered-turret-coils-internal.png_5
+  - first:
+      213: 3892276729649818428
+    second: gauss-cannon-Recovered-turret-coils-internal.png_6
+  - first:
+      213: 6134018739546732123
+    second: gauss-cannon-Recovered-turret-coils-internal.png_7
+  - first:
+      213: -6546979428199675876
+    second: gauss-cannon-Recovered-turret-coils-internal.png_8
+  - first:
+      213: -2266191083705031152
+    second: gauss-cannon-Recovered-turret-coils-internal.png_9
+  - first:
+      213: 8610228356056650930
+    second: gauss-cannon-Recovered-turret-coils-internal.png_10
+  - first:
+      213: -3616690612294593929
+    second: gauss-cannon-Recovered-turret-coils-internal.png_11
+  - first:
+      213: -2820522141408698782
+    second: gauss-cannon-Recovered-turret-coils-internal.png_12
+  - first:
+      213: 4927365915299569597
+    second: gauss-cannon-Recovered-turret-coils-internal_0
+  - first:
+      213: 3404857729718322481
+    second: gauss-cannon-Recovered-turret-coils-internal_1
+  - first:
+      213: 702731808492260308
+    second: gauss-cannon-Recovered-turret-coils-internal_2
+  - first:
+      213: -1727625674772372661
+    second: gauss-cannon-Recovered-turret-coils-internal_3
+  - first:
+      213: -6731744453692065789
+    second: gauss-cannon-Recovered-turret-coils-internal_4
+  - first:
+      213: -8482962249125738173
+    second: gauss-cannon-Recovered-turret-coils-internal_5
+  - first:
+      213: -5168527449259408221
+    second: gauss-cannon-Recovered-turret-coils-internal_6
+  - first:
+      213: 1694465873606200061
+    second: gauss-cannon-Recovered-turret-coils-internal_7
+  - first:
+      213: -3034164538328982898
+    second: gauss-cannon-Recovered-turret-coils-internal_8
+  - first:
+      213: 6576309858509051411
+    second: gauss-cannon-Recovered-turret-coils-internal_9
+  - first:
+      213: 8090679352385628724
+    second: gauss-cannon-Recovered-turret-coils-internal_10
+  - first:
+      213: -5804131998354387981
+    second: gauss-cannon-Recovered-turret-coils-internal_11
+  - first:
+      213: 8896177516959353044
+    second: gauss-cannon-Recovered-turret-coils-internal_12
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 100
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-coils-internal_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbf5cc39135816440800000000000000
+      internalID: 4927365915299569597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-coils-internal_1
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1358a92c01c704f20800000000000000
+      internalID: 3404857729718322481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-coils-internal_2
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4db8c894bda90c900800000000000000
+      internalID: 702731808492260308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-coils-internal_3
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4329562a9d3608e0800000000000000
+      internalID: -1727625674772372661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-coils-internal_4
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3087afee51a0492a0800000000000000
+      internalID: -6731744453692065789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-coils-internal_5
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 349cfc177c6764a80800000000000000
+      internalID: -8482962249125738173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-coils-internal_6
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a4890f3ba3b548b0800000000000000
+      internalID: -5168527449259408221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-coils-internal_7
+      rect:
+        serializedVersion: 2
+        x: 2016
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfac1500cb3f38710800000000000000
+      internalID: 1694465873606200061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-coils-internal_8
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8a50d69d6b74e5d0800000000000000
+      internalID: -3034164538328982898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-coils-internal_9
+      rect:
+        serializedVersion: 2
+        x: 2592
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 316d45939feb34b50800000000000000
+      internalID: 6576309858509051411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-coils-internal_10
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43a6886310ed74070800000000000000
+      internalID: 8090679352385628724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-coils-internal_11
+      rect:
+        serializedVersion: 2
+        x: 3168
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fbcb98f2b4937fa0800000000000000
+      internalID: -5804131998354387981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-coils-internal_12
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d8cd255152957b70800000000000000
+      internalID: 8896177516959353044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

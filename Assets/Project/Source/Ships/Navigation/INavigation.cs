@@ -1,10 +1,7 @@
-﻿using Exa.Data;
-using Exa.Ships.Targeting;
+﻿using Exa.Ships.Targeting;
 
-namespace Exa.Ships.Navigation
-{
-    public interface INavigation
-    {
+namespace Exa.Ships.Navigation {
+    public interface INavigation {
         ITarget LookAt { set; }
         ITarget MoveTo { set; }
         IThrustVectors ThrustVectors { get; }

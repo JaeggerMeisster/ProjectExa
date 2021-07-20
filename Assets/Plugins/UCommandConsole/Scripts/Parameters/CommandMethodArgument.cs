@@ -1,7 +1,4 @@
-﻿
-
-namespace UCommandConsole
-{
+﻿namespace UCommandConsole {
     //public class CommandMethodArgument : ICommandParameter
     //{
     //    private MethodArgumentContext propertyContext;

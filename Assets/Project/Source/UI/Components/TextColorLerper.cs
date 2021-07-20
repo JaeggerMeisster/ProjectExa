@@ -6,10 +6,8 @@ using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI.Components
-{
-    public class TextColorLerper : MonoBehaviour
-    {
+namespace Exa.UI.Components {
+    public class TextColorLerper : MonoBehaviour {
         [SerializeField] private Text text;
         [SerializeField] private ActivePair<Color> color;
 

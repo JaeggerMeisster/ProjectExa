@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
-using Exa.Bindings;
 using Exa.Data;
 using Exa.Grids.Blueprints;
+using Exa.Types.Binding;
 using Exa.UI.Components;
 using Exa.Utils;
 using UnityEngine;
@@ -9,11 +9,9 @@ using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI
-{
-    public class FleetBuilderBlueprintView : MonoBehaviour, IObserver<Blueprint>
-    {
-        [Header("References")] 
+namespace Exa.UI {
+    public class FleetBuilderBlueprintView : MonoBehaviour, IObserver<Blueprint> {
+        [Header("References")]
         public Button button;
         public Hoverable hoverable;
         [SerializeField] private Image thumbnailImage;
@@ -25,12 +23,12 @@ namespace Exa.UI
         [SerializeField] private Border borderOutline;
         [SerializeField] private Text overlayText;
 
-        [Header("Settings")] 
+        [Header("Settings")]
         [SerializeField] private ActivePair<Color> selectedColor;
 
-        public BlueprintTypeTabContent ParentTab { get; set; }
-
         private bool selected;
+
+        public BlueprintTypeTabContent ParentTab { get; set; }
 
         public bool Selected {
             get => selected;
@@ -51,8 +49,7 @@ namespace Exa.UI
                 var thumbnailRect = new Rect(0, 0, 512, 512);
                 var thumbnailPivot = new Vector2(0.5f, 0.5f);
                 thumbnailImage.sprite = Sprite.Create(data.Thumbnail, thumbnailRect, thumbnailPivot);
-            }
-            catch {
+            } catch {
                 Debug.LogWarning("Error setting blueprint thumbnail");
             }
         }

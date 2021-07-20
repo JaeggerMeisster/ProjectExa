@@ -4,27 +4,28 @@ using Exa.Math;
 using Exa.Ships.Targeting;
 using UnityEngine;
 
-namespace Exa.Ships.Navigation
-{
-    public class DirectionalNavigation : INavigation
-    {
+namespace Exa.Ships.Navigation {
+    public class DirectionalNavigation : INavigation {
         private static readonly Scalar DampeningThrustMultiplier = new Scalar(1.5f);
         private static readonly Scalar TargetThrustMultiplier = new Scalar(1f);
 
-        private readonly Ship ship;
+        private readonly GridInstance gridInstance;
         private readonly NavigationOptions options;
         private readonly AxisThrustVectors thrustVectors;
 
-        public ITarget LookAt { private get; set; }
-        public ITarget MoveTo { private get; set; }
-        public IThrustVectors ThrustVectors => thrustVectors;
-
-        public DirectionalNavigation(Ship ship, NavigationOptions options, Scalar thrustModifier) {
-            this.ship = ship;
+        public DirectionalNavigation(GridInstance gridInstance, NavigationOptions options, Scalar thrustModifier) {
+            this.gridInstance = gridInstance;
             this.options = options;
 
-            thrustVectors = ship.gameObject.AddComponent<AxisThrustVectors>();
-            thrustVectors.Setup(ship, thrustModifier);
+            thrustVectors = gridInstance.gameObject.AddComponent<AxisThrustVectors>();
+            thrustVectors.Setup(gridInstance, thrustModifier);
+        }
+
+        public ITarget LookAt { private get; set; }
+        public ITarget MoveTo { private get; set; }
+
+        public IThrustVectors ThrustVectors {
+            get => thrustVectors;
         }
 
         public void Update(float deltaTime) {
@@ -41,7 +42,7 @@ namespace Exa.Ships.Navigation
             if (DebugMode.Navigation.IsEnabled()) {
                 void DrawRay(Vector2 localFrameForce, Color color) {
                     var force = localFrameForce.Rotate(GetCurrentRotation()) / deltaTime;
-                    Debug.DrawRay(ship.GetPosition(), force / ship.Rigidbody2D.mass / 10, color);
+                    Debug.DrawRay(gridInstance.GetPosition(), force / gridInstance.Rigidbody2D.mass / 10, color);
                 }
 
                 DrawRay(frameTargetForce, Color.red);
@@ -70,25 +71,29 @@ namespace Exa.Ships.Navigation
         }
 
         private Vector2 GetLocalDifference(ITarget target) {
-            var currentPos = ship.GetPosition();
+            var currentPos = gridInstance.GetPosition();
             var diff = target.GetPosition(currentPos) - currentPos;
+
             return diff.Rotate(-GetCurrentRotation());
         }
 
         private float GetDecelerationVelocity(Vector2 direction, Scalar thrustModifier) {
             var force = thrustVectors.GetClampedForce(direction, thrustModifier);
-            return -(force / Mathf.Pow(ship.Rigidbody2D.mass, 2)).magnitude;
+
+            return -(force / Mathf.Pow(gridInstance.Rigidbody2D.mass, 2)).magnitude;
         }
 
         // TODO: Fix this
         private float GetBrakeDistance(Vector2 diff, VelocityValues velocityValues) {
             var currentVelocity = velocityValues.localVelocity.magnitude;
             var deceleration = GetDecelerationVelocity(-diff, DampeningThrustMultiplier);
+
             return CalculateBrakeDistance(currentVelocity, 0, deceleration);
         }
 
         private float CalculateBrakeDistance(float currentVelocity, float targetVelocity, float deceleration) {
             var t = (targetVelocity - currentVelocity) / deceleration;
+
             return currentVelocity * t + deceleration * (t * t) / 2f;
         }
 
@@ -102,6 +107,7 @@ namespace Exa.Ships.Navigation
             // Get force for this frame
             var frameTargetForce =
                 thrustVectors.GetForce(-velocityValues.localVelocityForce, DampeningThrustMultiplier) * deltaTime;
+
             var frameVelocityForce = -velocityValues.localVelocityForce / deltaTime;
 
             ProcessAxis(ref frameTargetForce.x, frameVelocityForce.x);
@@ -113,10 +119,12 @@ namespace Exa.Ships.Navigation
         private Vector2 MergeForces(Vector2 frameTargetForce, Vector2 frameDampenForce) {
             // TODO: Make this branch-less
             float ProcessAxis(float targetComponent, float dampenComponent) {
-                if (targetComponent == 0f) return dampenComponent;
+                if (targetComponent == 0f) {
+                    return dampenComponent;
+                }
 
                 // Check if the target and the dampen component have different signs
-                return targetComponent > 0f ^ dampenComponent > 0f
+                return (targetComponent > 0f) ^ (dampenComponent > 0f)
                     // If so, return the target vector component
                     ? targetComponent
                     // Otherwise, return biggest of the two components
@@ -134,23 +142,23 @@ namespace Exa.Ships.Navigation
         private void Fire(Vector2 frameTargetForce, float deltaTime) {
             // Transform force for this frame to velocity
             thrustVectors.Fire(frameTargetForce / deltaTime);
-            ship.Rigidbody2D.AddForce(frameTargetForce, ForceMode2D.Force);
+            gridInstance.Rigidbody2D.AddForce(frameTargetForce, ForceMode2D.Force);
         }
 
         private VelocityValues GetLocalVelocity() {
-            var localVelocity = ship.Rigidbody2D.velocity.Rotate(-GetCurrentRotation());
+            var localVelocity = gridInstance.Rigidbody2D.velocity.Rotate(-GetCurrentRotation());
+
             return new VelocityValues {
                 localVelocity = localVelocity,
-                localVelocityForce = localVelocity * ship.Rigidbody2D.mass
+                localVelocityForce = localVelocity * gridInstance.Rigidbody2D.mass
             };
         }
 
         private float GetCurrentRotation() {
-            return MathUtils.NormalizeAngle360(ship.Rigidbody2D.rotation);
+            return MathUtils.NormalizeAngle360(gridInstance.Rigidbody2D.rotation);
         }
 
-        private struct VelocityValues
-        {
+        private struct VelocityValues {
             public Vector2 localVelocity;
             public Vector2 localVelocityForce;
         }

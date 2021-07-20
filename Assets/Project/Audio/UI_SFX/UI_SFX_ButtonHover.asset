@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: UI_SFX_ButtonHover
   m_EditorClassIdentifier: 
   id: UI_SFX_ButtonHover
-  audioType: 1
+  audioType: 2
   audioClip: {fileID: 8300000, guid: 55350632da60ba94cb593fa6bfe5e07b, type: 3}
-  volume: 0.4
-  pitch: 1
-  allowMultipleOnTrack: 1
-  allowMultipleOfType: 1
+  soundConfig:
+    volume: 0.4
+    pitch: 1
+    allowMultipleOfType: 1
+    allowMultipleOnTrack: 1

@@ -1,25 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &452510070786030968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4166625144049295618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f121ac56bbdea54b8f616cacba87458, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchoredBlueprintBlock:
-    gridAnchor: {x: 0, y: 0}
-    blueprintBlock:
-      id: 
-      flippedX: 0
-      flippedY: 0
-  physicalBehaviour: {fileID: 7875990950422104508}
-  gyroscopeBehaviour: {fileID: 6771484502415086781}
 --- !u!114 &6771484502415086781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,6 +26,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 0}
+--- !u!114 &4438722812619329998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4166625144049295618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b28ac2d5bd8b414e984c0d2a8d80743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockPoolMember: {fileID: 0}
+  physicalBehaviour: {fileID: 7875990950422104508}
+  collider: {fileID: 0}
 --- !u!1001 &5122124152102298080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53,6 +48,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6885373984856574419, guid: ebfb89a637c2e8a4aa93425e10f8bb04,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6885373984856574419, guid: ebfb89a637c2e8a4aa93425e10f8bb04,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -70,6 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6885373984856574419, guid: ebfb89a637c2e8a4aa93425e10f8bb04,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6885373984856574419, guid: ebfb89a637c2e8a4aa93425e10f8bb04,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -81,16 +86,6 @@ PrefabInstance:
     - target: {fileID: 6885373984856574419, guid: ebfb89a637c2e8a4aa93425e10f8bb04,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6885373984856574419, guid: ebfb89a637c2e8a4aa93425e10f8bb04,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6885373984856574419, guid: ebfb89a637c2e8a4aa93425e10f8bb04,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6885373984856574419, guid: ebfb89a637c2e8a4aa93425e10f8bb04,

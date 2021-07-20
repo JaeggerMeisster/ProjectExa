@@ -35,14 +35,13 @@ void VertShader(inout appdata_full v, out Input data)
 
 void PixShader(Input input, inout SurfaceOutput o)
 {
-
 #if USE_DERIVATIVE | BEVEL_ON
 	float3 delta = float3(1.0 / _TextureWidth, 1.0 / _TextureHeight, 0.0);
 
-	float4 smp4x = { tex2D(_MainTex, input.uv_MainTex - delta.xz).a,
-					tex2D(_MainTex, input.uv_MainTex + delta.xz).a,
-					tex2D(_MainTex, input.uv_MainTex - delta.zy).a,
-					tex2D(_MainTex, input.uv_MainTex + delta.zy).a };
+	float4 smp4x = {tex2D(_MainTex, input.uv_MainTex - delta.xz).a,
+		tex2D(_MainTex, input.uv_MainTex + delta.xz).a,
+		tex2D(_MainTex, input.uv_MainTex - delta.zy).a,
+		tex2D(_MainTex, input.uv_MainTex + delta.zy).a};
 #endif
 
 #if USE_DERIVATIVE
@@ -63,8 +62,8 @@ void PixShader(Input input, inout SurfaceOutput o)
 	// Signed distance
 	float c = tex2D(_MainTex, input.uv_MainTex).a;
 	float sd = (.5 - c - input.param.x) * scale + .5;
-	float outline = _OutlineWidth*_ScaleRatioA * scale;
-	float softness = _OutlineSoftness*_ScaleRatioA * scale;
+	float outline = _OutlineWidth * _ScaleRatioA * scale;
+	float softness = _OutlineSoftness * _ScaleRatioA * scale;
 
 	// Color & Alpha
 	float4 faceColor = _FaceColor;

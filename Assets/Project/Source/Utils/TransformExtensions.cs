@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Exa.Utils
-{
-    public static class TransformExtensions
-    {
+namespace Exa.Utils {
+    public static class TransformExtensions {
         /// <summary>
-        /// Provides type safe enumerator for a given transform
+        ///     Provides type safe enumerator for a given transform
         /// </summary>
         /// <param name="transform"></param>
         /// <returns></returns>
@@ -26,6 +24,10 @@ namespace Exa.Utils
             foreach (Transform child in transform) {
                 Object.Destroy(child.gameObject);
             }
+        }
+
+        public static RectTransform GetRectTransform(this Component behaviour) {
+            return behaviour.transform as RectTransform;
         }
     }
 }

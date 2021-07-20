@@ -9,50 +9,50 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Exa.UI
-{
-    public class FleetView : MonoBehaviour
-    {
-        [Header("References")] 
+namespace Exa.UI {
+    public class FleetView : MonoBehaviour {
+        [Header("References")]
         [SerializeField] private Transform mothershipContainer;
         [SerializeField] private Transform unitsContainer;
         [SerializeField] private Text unitCountText;
 
-        [Header("Settings")] 
+        [Header("Settings")]
         [SerializeField] private AnimationArgs animationArgs;
 
-        [Header("Events")] 
+        [Header("Events")]
         public UnityEvent fleetChange = new UnityEvent();
+        private Tween colorTween;
 
         private Tween fontSizeTween;
-        private Tween colorTween;
         private Func<BlueprintContainer, FleetBuilderBlueprintView> viewFactory;
 
         public Fleet Fleet { get; private set; }
 
         public void Create(int capacity, Func<BlueprintContainer, FleetBuilderBlueprintView> viewFactory) {
-            this.Fleet = new Fleet(capacity);
+            Fleet = new Fleet(capacity);
             this.viewFactory = viewFactory;
         }
 
         public void Toggle(BlueprintContainer blueprint) {
-            if (Fleet.Contains(blueprint))
+            if (Fleet.Contains(blueprint)) {
                 Remove(blueprint);
-            else
+            } else {
                 Insert(blueprint);
+            }
         }
 
         public void Insert(BlueprintContainer blueprint) {
-            if (blueprint.Data.BlueprintType.IsMothership)
+            if (blueprint.Data.BlueprintType.IsMothership) {
                 AddMothership(blueprint);
-            else
+            } else {
                 AddUnit(blueprint);
+            }
         }
 
         public void Remove(BlueprintContainer blueprint) {
-            if (blueprint.Data.BlueprintType.IsMothership)
+            if (blueprint.Data.BlueprintType.IsMothership) {
                 Fleet.mothership = null;
-            else {
+            } else {
                 Fleet.units.Remove(blueprint);
                 UpdateUnitCountText();
             }
@@ -63,15 +63,19 @@ namespace Exa.UI
 
         public void Clear(int capacity) {
             var blueprints = Fleet.Where(blueprint => blueprint != null);
-            foreach (var blueprint in blueprints)
+
+            foreach (var blueprint in blueprints) {
                 SetSelected(blueprint, false);
+            }
+
             Fleet = new Fleet(capacity);
             UpdateUnitCountText();
         }
 
         private void AddMothership(BlueprintContainer blueprint) {
-            if (Fleet.mothership != null)
+            if (Fleet.mothership != null) {
                 SetSelected(Fleet.mothership, false);
+            }
 
             Fleet.mothership = blueprint;
             fleetChange.Invoke();
@@ -82,6 +86,7 @@ namespace Exa.UI
         private void AddUnit(BlueprintContainer blueprint) {
             if (Fleet.units.Count == Fleet.units.Capacity) {
                 OnUnitsFull(animationArgs);
+
                 return;
             }
 
@@ -99,8 +104,7 @@ namespace Exa.UI
             if (container != null) {
                 view.transform.SetParent(container);
                 view.ParentTab.ChildCount--;
-            }
-            else {
+            } else {
                 view.transform.SetParent(view.ParentTab.container);
                 view.ParentTab.ChildCount++;
             }
@@ -110,10 +114,12 @@ namespace Exa.UI
 
         private void OnUnitsFull(AnimationArgs args) {
             unitCountText.fontSize = args.fontSize.active;
+
             unitCountText.DOFontSize(args.fontSize.inactive, args.animTime)
                 .Replace(ref fontSizeTween);
 
             unitCountText.color = args.color.active;
+
             unitCountText.DOColor(args.color.inactive, args.animTime)
                 .Replace(ref colorTween);
         }
@@ -123,8 +129,7 @@ namespace Exa.UI
         }
 
         [Serializable]
-        public struct AnimationArgs
-        {
+        public struct AnimationArgs {
             public float animTime;
             public ActivePair<int> fontSize;
             public ActivePair<Color> color;

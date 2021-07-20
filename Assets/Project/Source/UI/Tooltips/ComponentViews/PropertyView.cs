@@ -1,14 +1,12 @@
-﻿using Exa.Generics;
-using System;
+﻿using System;
+using Exa.Types.Generics;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Exa.UI.Tooltips
-{
+namespace Exa.UI.Tooltips {
     [Serializable]
-    public class PropertyView : TooltipComponentView<LabeledValue<object>>
-    {
-        [Header("References")] 
+    public class PropertyView : TooltipComponentView<LabeledValue<object>> {
+        [Header("References")]
         [SerializeField] private Text keyText;
         [SerializeField] private Text valueText;
 
@@ -19,6 +17,10 @@ namespace Exa.UI.Tooltips
 
         public void SetValue(object value) {
             valueText.text = value.ToString();
+        }
+
+        public void SetLabel(string label) {
+            keyText.text = label;
         }
 
         protected override void Refresh(LabeledValue<object> labeledValue) {

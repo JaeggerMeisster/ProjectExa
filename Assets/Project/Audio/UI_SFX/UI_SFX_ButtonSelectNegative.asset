@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: UI_SFX_ButtonSelectNegative
   m_EditorClassIdentifier: 
   id: UI_SFX_ButtonSelectNegative
-  audioType: 1
+  audioType: 2
   audioClip: {fileID: 8300000, guid: 805a471d5e1285642b49cb687239ea7b, type: 3}
-  volume: 0.5
-  pitch: 1
-  allowMultipleOnTrack: 1
-  allowMultipleOfType: 1
+  soundConfig:
+    volume: 0.5
+    pitch: 1
+    allowMultipleOfType: 1
+    allowMultipleOnTrack: 1

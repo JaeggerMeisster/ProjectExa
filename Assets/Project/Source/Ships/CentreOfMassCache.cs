@@ -2,12 +2,10 @@
 using System.Text;
 using UnityEngine;
 
-namespace Exa.Ships
-{
-    public partial class CentreOfMassCache : Dictionary<Vector2, float>
-    {
-        private Vector2 vectoredTotal = new Vector2();
-        private float totalMass = 0f;
+namespace Exa.Ships {
+    public class CentreOfMassCache : Dictionary<Vector2, float> {
+        private float totalMass;
+        private Vector2 vectoredTotal;
 
         public new void Add(Vector2 position, float mass) {
             base.Add(position, mass);
@@ -31,6 +29,7 @@ namespace Exa.Ships
         public override string ToString() {
             var sb = new StringBuilder();
             sb.Append($"Centre of mass: {GetCentreOfMass()}");
+
             return sb.ToString();
         }
     }

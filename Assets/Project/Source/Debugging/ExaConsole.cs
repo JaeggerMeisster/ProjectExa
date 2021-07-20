@@ -2,14 +2,12 @@
 using UCommandConsole;
 using UnityEngine;
 
-namespace Exa.Debugging
-{
-    public class ExaConsole : MonoBehaviour
-    {
+namespace Exa.Debugging {
+    public class ExaConsole : MonoBehaviour {
         private Console console;
 
         private void Start() {
-            console = Systems.UI.console;
+            console = S.UI.Console;
 
             console.Container.AddGetter(() => new ClsCommand());
             console.Container.AddGetter(() => new SpawnCommand());

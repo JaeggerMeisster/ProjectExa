@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16438f0353e4382b0fcd91150af41f4, type: 3}
+  m_Name: ShieldGeneratorMK1
+  m_EditorClassIdentifier: 
+  id: ShieldGeneratorMK1
+  displayId: Shield Generator MK1
+  category: 256
+  thumbnail: {fileID: 3846102588298344479, guid: 937e27828f2f2024ba2726a806ff5d8f,
+    type: 3}
+  size: {x: 1, y: 1}
+  metadata:
+    strength: 10
+    blockCosts:
+      creditCost: 100
+      metalsCost: 5
+  inertPrefab: {fileID: 4636372872592261853, guid: 3636cc27c7137c74a956ef3098f8032f,
+    type: 3}
+  alivePrefab: {fileID: 6229444498424008411, guid: d06dc347ad0ad5e40aa7d747c62c0471,
+    type: 3}
+  physicalPartial:
+    data:
+      hull: 50
+      armor: 10
+      mass: 5
+  shieldGeneratorPartial:
+    data:
+      shieldRadius: 3
+      recoverTime: 5
+      health: 600

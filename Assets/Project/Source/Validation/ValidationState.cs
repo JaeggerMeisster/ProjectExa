@@ -3,23 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using Exa.Utils;
 
-namespace Exa.Validation
-{
+namespace Exa.Validation {
     /// <summary>
-    /// Used as an error container for multiple validators
+    ///     Used as an error container for multiple validators
     /// </summary>
-    public class ValidationState
-    {
-        // Keep track of error handlers in a nested dictionary
-        // Access the error handler or cleaner by [validator][error]
-        internal Dictionary<IValidator, IDictionary<string, Action<ValidationError>>> errorHandlers;
-
-        internal Dictionary<IValidator, IDictionary<string, Action<ValidationError>>> errorCleaners;
+    public class ValidationState {
+        internal Action<ValidationError> defaultErrorCleaner;
 
         // Default implementation for the error handlers or cleaners
         internal Action<ValidationError> defaultErrorHandler;
 
-        internal Action<ValidationError> defaultErrorCleaner;
+        internal Dictionary<IValidator, IDictionary<string, Action<ValidationError>>> errorCleaners;
+        // Keep track of error handlers in a nested dictionary
+        // Access the error handler or cleaner by [validator][error]
+        internal Dictionary<IValidator, IDictionary<string, Action<ValidationError>>> errorHandlers;
 
         // Keep track of errors thrown by a specific validator
         internal Dictionary<IValidator, IEnumerable<ValidationError>> lastControlErrors;
@@ -44,30 +41,38 @@ namespace Exa.Validation
             var currErrorIds = errors.Select(error => error.Id);
 
             // Error handlers
-            foreach (var currentError in errors) {
-                // Check if there is a specific error handler for the error, otherwise use the default one
-                if (errorHandlers.NestedContainsKey(validator, currentError.Id))
+            foreach (var currentError in errors) // Check if there is a specific error handler for the error, otherwise use the default one
+            {
+                if (errorHandlers.NestedContainsKey(validator, currentError.Id)) {
                     errorHandlers[validator][currentError.Id](currentError);
-                else
+                } else {
                     defaultErrorHandler(currentError);
+                }
             }
 
-            if (lastControlErrors.ContainsKey(validator)) {
-                // Get errors from the same validator that were handled last control, but are no longer present
+            if (lastControlErrors.ContainsKey(validator)) // Get errors from the same validator that were handled last control, but are no longer present
+            {
                 foreach (var lastControlError in lastControlErrors[validator]) {
                     // If error wasn't thrown in the last control, it doesn't need to be cleaned up
-                    if (currErrorIds.Contains(lastControlError.Id)) continue;
+                    if (currErrorIds.Contains(lastControlError.Id)) {
+                        continue;
+                    }
 
                     // Check if there is a specific error handler for the error, otherwise use the default one
-                    if (errorHandlers.NestedContainsKey(validator, lastControlError.Id))
+                    if (errorHandlers.NestedContainsKey(validator, lastControlError.Id)) {
                         errorCleaners[validator][lastControlError.Id](lastControlError);
-                    else
+                    } else {
                         defaultErrorCleaner(lastControlError);
+                    }
                 }
             }
 
             // Keep track of the thrown errors for the current validator
             lastControlErrors[validator] = errors;
+        }
+
+        public IEnumerable<ValidationError> GetActiveErrors() {
+            return lastControlErrors.SelectMany(kvp => kvp.Value);
         }
     }
 }

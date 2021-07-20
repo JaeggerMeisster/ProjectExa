@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1520810962895759472}
   - component: {fileID: 6437573395784765496}
+  - component: {fileID: 9123271562733585336}
   m_Layer: 0
   m_Name: ST_AudioTrack
   m_TagString: Untagged
@@ -46,7 +47,20 @@ MonoBehaviour:
   volumeKey: musicVolume
   audioMixerGroup: {fileID: 9039013957981596346, guid: f60bfc6b3fd678042befa6c918a4a877,
     type: 2}
-  MainMenuTrackList: {fileID: 11400000, guid: 15c3cdf87f8c12649afd5241f73052f8, type: 2}
+  soundTrackProvider: {fileID: 9123271562733585336}
+--- !u!114 &9123271562733585336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808218022457454919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a459d32b3d0c64f99cc6cf4b480a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSoundTrack: {fileID: 11400000, guid: 15c3cdf87f8c12649afd5241f73052f8, type: 2}
 --- !u!1 &2953528372697732043
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,17 +1,15 @@
-﻿namespace Exa.UI.Controls
-{
+﻿namespace Exa.UI.Controls {
     /// <summary>
-    /// Supports a user control that can be checked for a changed value
+    ///     Supports a user control that can be checked for a changed value
     /// </summary>
-    public interface IControl
-    {
+    public interface IControl {
         /// <summary>
-        /// Checks if the value is up-to-date
+        ///     Checks if the value is up-to-date
         /// </summary>
         bool IsDirty { get; }
 
         /// <summary>
-        /// Marks the current value as being up-to-date
+        ///     Marks the current value as being up-to-date
         /// </summary>
         void SetClean();
     }

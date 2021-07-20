@@ -1,30 +1,25 @@
 ﻿using System.Text;
 using UCommandConsole.Exceptions;
 
-namespace UCommandConsole.TypeParsers
-{
-    public class StringParser : CustomTypeParser<string>
-    {
-        public override string GetFormatString()
-        {
+namespace UCommandConsole.TypeParsers {
+    public class StringParser : CustomTypeParser<string> {
+        public override string GetFormatString() {
             return "\n[x]\n";
         }
 
-        public override string Parse(CommandParser tokenizer)
-        {
+        public override string Parse(CommandParser tokenizer) {
             var sb = new StringBuilder();
 
-            if (tokenizer.Matches('"'))
-            {
+            if (tokenizer.Matches('"')) {
                 tokenizer.NextChar();
 
                 var hasClosedParenthesis = false;
-                while (!tokenizer.IsEOF)
-                {
-                    if (tokenizer.Matches('"'))
-                    {
+
+                while (!tokenizer.IsEOF) {
+                    if (tokenizer.Matches('"')) {
                         hasClosedParenthesis = true;
                         tokenizer.NextChar();
+
                         break;
                     }
 
@@ -32,8 +27,7 @@ namespace UCommandConsole.TypeParsers
                     tokenizer.NextChar();
                 }
 
-                if (!hasClosedParenthesis)
-                {
+                if (!hasClosedParenthesis) {
                     throw new InputFormatException("String parenthesis not closed");
                 }
             }

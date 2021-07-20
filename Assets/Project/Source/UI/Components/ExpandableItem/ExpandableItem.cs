@@ -4,18 +4,27 @@ using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI.Components
-{
-    public class ExpandableItem : MonoBehaviour
-    {
+namespace Exa.UI.Components {
+    public class ExpandableItem : MonoBehaviour {
+        [SerializeField] private Transform content;
         [SerializeField] private Button button;
         [SerializeField] private Image shrinkExpandImage;
         [SerializeField] private Text headerText;
         [SerializeField] private UIFlip arrowFlip;
-        [Space] 
-        [SerializeField] private bool contentActive = false;
+        [Space]
+        [SerializeField] private bool expanded;
 
-        public Transform content;
+        public Transform Content {
+            get => content;
+        }
+
+        public bool Expanded {
+            get => expanded;
+            set {
+                expanded = value;
+                ReflectExpanded();
+            }
+        }
 
         public string HeaderText {
             set => headerText.text = value;
@@ -23,17 +32,16 @@ namespace Exa.UI.Components
 
         private void Awake() {
             button.onClick.AddListener(OnClick);
-            ReflectActive();
+            ReflectExpanded();
         }
 
         private void OnClick() {
-            contentActive = !contentActive;
-            ReflectActive();
+            Expanded = !Expanded;
         }
 
-        private void ReflectActive() {
-            content.gameObject.SetActive(contentActive);
-            arrowFlip.vertical = contentActive;
+        private void ReflectExpanded() {
+            content.gameObject.SetActive(Expanded);
+            arrowFlip.vertical = Expanded;
         }
     }
 }

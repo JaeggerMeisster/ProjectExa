@@ -1,25 +1,20 @@
 ﻿using Exa.Pooling;
 
-namespace Exa.Grids.Blocks
-{
-    public enum PrefabType
-    {
+namespace Exa.Grids.Blocks {
+    public enum PrefabType {
         inert,
         alive
     }
 
-    public class InertBlockPoolGroup : BlockPoolGroupBase
-    {
-        protected override PrefabType PrefabType => PrefabType.inert;
-
+    public class InertBlockPoolGroup : BlockPoolGroupBase<PoolMember> {
         /// <summary>
-        /// Creates an inert block prefab on this group
-        /// </summary> 
+        ///     Creates an inert block prefab on this group
+        /// </summary>
         /// <param name="blockTemplate"></param>
         /// <returns></returns>
         public void CreateInertPrefab(BlockTemplate blockTemplate) {
             var id = blockTemplate.id;
-            var prefab = CreatePrefab(blockTemplate, PrefabType);
+            var prefab = CreatePrefab(blockTemplate, PrefabType.inert);
             var pool = CreatePool<Pool>(prefab, $"Inert block pool: {id}", out var settings);
             poolById[id] = pool;
             pool.Configure(settings);

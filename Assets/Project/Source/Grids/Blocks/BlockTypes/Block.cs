@@ -1,35 +1,39 @@
-﻿using Exa.Ships;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Exa.Grids.Blocks.Components;
 using Exa.Grids.Blueprints;
-using Unity.Entities;
-using UnityEngine;
-using System.Collections.Generic;
+using Exa.Ships;
 using Exa.Utils;
+using UnityEngine;
 
 #pragma warning disable CS0649
 
-namespace Exa.Grids.Blocks.BlockTypes
-{
+namespace Exa.Grids.Blocks.BlockTypes {
     /// <summary>
-    /// Base class for blocks
+    ///     Base class for blocks
     /// </summary>
-    public class Block : MonoBehaviour, IBlock, IGridMember, IPhysical
-    {
-        [HideInInspector] public AnchoredBlueprintBlock anchoredBlueprintBlock;
+    public class Block : MonoBehaviour, IGridMember {
+        [HideInInspector] public BlockPoolMember blockPoolMember;
 
         [SerializeField] private PhysicalBehaviour physicalBehaviour;
-        [SerializeField, HideInInspector] private new BoxCollider2D collider;
+        [SerializeField] [HideInInspector] private new BoxCollider2D collider;
+        [NonSerialized] public ABpBlock aBpBlock;
         private IGridInstance parent;
 
-        public Vector2Int GridAnchor => anchoredBlueprintBlock.gridAnchor;
+    #if UNITY_EDITOR
+        public bool DebugFocused { get; set; }
+    #endif
 
-        public BlueprintBlock BlueprintBlock => anchoredBlueprintBlock.blueprintBlock;
+    #if ENABLE_BLOCK_LOGS
+        public List<string> Logs { get; } = new List<string>();
+    #endif
 
-        BlockBehaviour<PhysicalData> IBehaviourMarker<PhysicalData>.Component {
+        private List<BlockBehaviour> behaviours;
+
+        public PhysicalBehaviour PhysicalBehaviour {
             get => physicalBehaviour;
         }
-
-        public PhysicalBehaviour PhysicalBehaviour => physicalBehaviour;
 
         public BoxCollider2D Collider {
             get => collider;
@@ -38,72 +42,131 @@ namespace Exa.Grids.Blocks.BlockTypes
 
         public IGridInstance Parent {
             get => parent;
-            set {
-                if (parent == value) return;
+        }
 
-                if (parent != null && !Systems.IsQuitting) {
-                    OnRemove();
-                }
+        public void SetParentWithoutNotify(IGridInstance value) {
+            parent = value;
+        }
 
-                parent = value;
+        /// <summary>
+        /// Notifies the block as being added.
+        /// </summary>
+        /// <param name="mockSetValues">If true, it will call the OnBlockDataReceived handler on every behaviour</param>
+        public void NotifyAdded(bool mockSetValues) {
+            OnAdd();
 
-                if (parent != null) {
-                    OnAdd();
-                }
+            foreach (var behaviour in GetBehaviours()) {
+                behaviour.NotifyAdded();
 
-                foreach (var behaviour in GetBehaviours()) {
-                    behaviour.Parent = value;
+                if (mockSetValues) {
+                    behaviour.MockSetValues();
                 }
             }
         }
 
-        public Ship Ship => Parent as Ship;
+        public void NotifyRemoved() {
+            OnRemove();
 
-        private void OnDisable() {
-            if (Systems.IsQuitting) return;
-
-            Parent.BlockGrid.Remove(GridAnchor);
-            Parent = null;
-        }
-
-        public TComponent GetBlockComponent<TComponent, TValues>()
-            where TComponent : BlockBehaviour<TValues>
-            where TValues : struct, IBlockComponentValues {
-            if (this is IBehaviourMarker<TValues> behaviourMarker && behaviourMarker.Component is TComponent behaviour) {
-                return behaviour;
+            foreach (var behaviour in GetBehaviours()) {
+                behaviour.NotifyRemoved();
             }
-
-            return null;
         }
 
-        public bool TryGetBlockComponent<TComponent, TValues>(out TComponent value)
-            where TComponent : BlockBehaviour<TValues>
-            where TValues : struct, IBlockComponentValues {
-            value = GetBlockComponent<TComponent, TValues>();
-            return value != null;
+        public GridInstance GridInstance {
+            get => Parent as GridInstance;
+        }
+
+        public Vector2Int GridAnchor {
+            get => aBpBlock.gridAnchor;
+        }
+
+        public BlueprintBlock BlueprintBlock {
+            get => aBpBlock.blueprintBlock;
         }
 
         public void AddGridTotals(GridTotals totals) {
+            totals.Metadata += BlueprintBlock.Template.metadata;
+
             foreach (var behaviour in GetBehaviours()) {
                 behaviour.BlockComponentData.AddGridTotals(totals);
             }
         }
 
         public void RemoveGridTotals(GridTotals totals) {
+            totals.Metadata += BlueprintBlock.Template.metadata;
+
             foreach (var behaviour in GetBehaviours()) {
                 behaviour.BlockComponentData.RemoveGridTotals(totals);
             }
         }
 
-        // TODO: cache the result of this operation
-        public virtual IEnumerable<BlockBehaviourBase> GetBehaviours() {
-            return new BlockBehaviourBase[] {
-                physicalBehaviour
-            };
+        public bool Equals(IGridMember other) {
+            return IGridMemberComparer.Default.Equals(this, other);
         }
 
-        protected virtual void OnAdd() { }
+        /// <summary>
+        ///     Returns the block to the pool
+        /// </summary>
+        public void DestroyBlock() {
+        #if ENABLE_BLOCK_LOGS
+            Logs.Add("Function: DestroyBlock");
+        #endif
 
-        protected virtual void OnRemove() { }
+            if (GS.IsQuitting) {
+                parent = null;
+
+            #if ENABLE_BLOCK_LOGS
+                Logs.Add("Function: DestroyBlock: Return");
+
+                return;
+            #endif
+            }
+
+            Parent.RemoveBlock(this);
+            gameObject.SetActive(false);
+            blockPoolMember.ReturnBlock();
+        }
+
+        public T GetBehaviour<T>() {
+            return GetBehaviours().FindFirst<T>();
+        }
+
+        public BlockBehaviour<T> GetBehaviourOfData<T>()
+            where T : struct, IBlockComponentValues {
+            return GetBehaviours()
+                .Where(behaviour => behaviour.GetDataTypeIsOf<T>())
+                .Cast<BlockBehaviour<T>>()
+                .FirstOrDefault();
+        }
+
+        public bool TryGetBehaviour<T>(out T value) {
+            value = GetBehaviour<T>();
+
+            return value.Equals(default);
+        }
+
+        public IEnumerable<BlockBehaviour> GetBehaviours() {
+            if (behaviours == null) {
+                gameObject.GetComponents(behaviours = new List<BlockBehaviour>());
+            }
+
+            return behaviours;
+        }
+
+        protected virtual void OnAdd() {
+        #if ENABLE_BLOCK_LOGS
+            Logs.Add("Function: OnAdd");
+        #endif
+        }
+
+        protected virtual void OnRemove() {
+        #if ENABLE_BLOCK_LOGS
+            Logs.Add("Function: OnRemove");
+        #endif
+        }
+
+        public override string ToString() {
+            return $"Block: {BlueprintBlock.Template.id}";
+        }
     }
 }

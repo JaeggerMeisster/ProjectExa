@@ -1,0 +1,486 @@
+fileFormatVersion: 2
+guid: a6ab7dd19c7190f479bcd4add75b3acf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2467314271473265160
+    second: _0
+  - first:
+      213: -7293702687530219678
+    second: _1
+  - first:
+      213: 5465930022627080920
+    second: _2
+  - first:
+      213: 4926910201048525895
+    second: _3
+  - first:
+      213: -5298160333025865069
+    second: _4
+  - first:
+      213: 3419218804046794875
+    second: _5
+  - first:
+      213: -2676912789535806524
+    second: _6
+  - first:
+      213: -7495441581297366054
+    second: _7
+  - first:
+      213: 8695294115065564093
+    second: _8
+  - first:
+      213: 185879130570732872
+    second: _9
+  - first:
+      213: -7309764922532138887
+    second: _10
+  - first:
+      213: 7379336468195929769
+    second: _11
+  - first:
+      213: -4224994282895194646
+    second: _12
+  - first:
+      213: 7936192732258778490
+    second: gauss-cannon-Recovered-turret-body-overlay.png_0
+  - first:
+      213: -432142121941222737
+    second: gauss-cannon-Recovered-turret-body-overlay.png_1
+  - first:
+      213: -5832194850067081258
+    second: gauss-cannon-Recovered-turret-body-overlay.png_2
+  - first:
+      213: 7487904712280265548
+    second: gauss-cannon-Recovered-turret-body-overlay.png_3
+  - first:
+      213: 4712774249149925811
+    second: gauss-cannon-Recovered-turret-body-overlay.png_4
+  - first:
+      213: -794853661759510789
+    second: gauss-cannon-Recovered-turret-body-overlay.png_5
+  - first:
+      213: -1235299043534237511
+    second: gauss-cannon-Recovered-turret-body-overlay.png_6
+  - first:
+      213: -1553072067105563803
+    second: gauss-cannon-Recovered-turret-body-overlay.png_7
+  - first:
+      213: 6716797556757610669
+    second: gauss-cannon-Recovered-turret-body-overlay.png_8
+  - first:
+      213: -1678500585087838066
+    second: gauss-cannon-Recovered-turret-body-overlay.png_9
+  - first:
+      213: -6203607323881826524
+    second: gauss-cannon-Recovered-turret-body-overlay.png_10
+  - first:
+      213: -7807642770930709030
+    second: gauss-cannon-Recovered-turret-body-overlay.png_11
+  - first:
+      213: 3668691640283226286
+    second: gauss-cannon-Recovered-turret-body-overlay.png_12
+  - first:
+      213: -53255496450183136
+    second: gauss-cannon-Recovered-turret-body-overlay_0
+  - first:
+      213: -2692604467974377694
+    second: gauss-cannon-Recovered-turret-body-overlay_1
+  - first:
+      213: -676883107802455272
+    second: gauss-cannon-Recovered-turret-body-overlay_2
+  - first:
+      213: 7883675776559130216
+    second: gauss-cannon-Recovered-turret-body-overlay_3
+  - first:
+      213: 2044827591063816625
+    second: gauss-cannon-Recovered-turret-body-overlay_4
+  - first:
+      213: 69956772877787336
+    second: gauss-cannon-Recovered-turret-body-overlay_5
+  - first:
+      213: -5666677976772587823
+    second: gauss-cannon-Recovered-turret-body-overlay_6
+  - first:
+      213: -5326632798978150470
+    second: gauss-cannon-Recovered-turret-body-overlay_7
+  - first:
+      213: -2974959753820492039
+    second: gauss-cannon-Recovered-turret-body-overlay_8
+  - first:
+      213: 1183983832105733607
+    second: gauss-cannon-Recovered-turret-body-overlay_9
+  - first:
+      213: -2082003668946055910
+    second: gauss-cannon-Recovered-turret-body-overlay_10
+  - first:
+      213: 3168541246770893606
+    second: gauss-cannon-Recovered-turret-body-overlay_11
+  - first:
+      213: -1296771360482614862
+    second: gauss-cannon-Recovered-turret-body-overlay_12
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 100
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-body-overlay_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 020ffbb786cc24ff0800000000000000
+      internalID: -53255496450183136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-body-overlay_1
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22fe1cd9082f1aad0800000000000000
+      internalID: -2692604467974377694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-body-overlay_2
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 813e8f4566a3b96f0800000000000000
+      internalID: -676883107802455272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-body-overlay_3
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 866a82a6951786d60800000000000000
+      internalID: 7883675776559130216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-body-overlay_4
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b9c6403cdfa06c10800000000000000
+      internalID: 2044827591063816625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-body-overlay_5
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c06305705988f000800000000000000
+      internalID: 69956772877787336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-body-overlay_6
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dec0f9476aeb51b0800000000000000
+      internalID: -5666677976772587823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-body-overlay_7
+      rect:
+        serializedVersion: 2
+        x: 2016
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abf66f7e0bff316b0800000000000000
+      internalID: -5326632798978150470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-body-overlay_8
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fe227cadd1d6b6d0800000000000000
+      internalID: -2974959753820492039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-body-overlay_9
+      rect:
+        serializedVersion: 2
+        x: 2592
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7edc774b50b5e6010800000000000000
+      internalID: 1183983832105733607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-body-overlay_10
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1d096ba1bc3b13e0800000000000000
+      internalID: -2082003668946055910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-body-overlay_11
+      rect:
+        serializedVersion: 2
+        x: 3168
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 623d3fde97be8fb20800000000000000
+      internalID: 3168541246770893606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gauss-cannon-Recovered-turret-body-overlay_12
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 0
+        width: 288
+        height: 288
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b1a8877151f00ee0800000000000000
+      internalID: -1296771360482614862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

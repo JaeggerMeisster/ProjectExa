@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce01822a88a42c40a160fb3eda20674, type: 3}
+  m_Name: ResearchItemBag
+  m_EditorClassIdentifier: Assembly-CSharp:Exa.Research:ResearchItemBag
+  objects:
+  - {fileID: 11400000, guid: a970d0facbb1f1b43b386e57a391b144, type: 2}
+  - {fileID: 11400000, guid: 15a6113968eb4884e812fcd2326562b3, type: 2}

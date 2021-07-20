@@ -1,7 +1,5 @@
-﻿namespace Exa.AI
-{
-    public interface IAgent
-    {
+﻿namespace Exa.AI {
+    public interface IAgent {
         void AIUpdate();
     }
 }

@@ -57,6 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -141,8 +142,6 @@ MonoBehaviour:
   color:
     active: {r: 0.29411766, g: 0.7254902, b: 0.7053667, a: 1}
     inactive: {r: 0.74509805, g: 0.74509805, b: 0.7647059, a: 1}
-  activeColor: {r: 0.29411766, g: 0.7254902, b: 0.7053667, a: 1}
-  inactiveColor: {r: 1, g: 1, b: 1, a: 0.78431374}
 --- !u!225 &4731027747724969547
 CanvasGroup:
   m_ObjectHideFlags: 0

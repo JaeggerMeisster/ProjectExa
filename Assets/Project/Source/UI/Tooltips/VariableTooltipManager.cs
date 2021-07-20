@@ -2,10 +2,8 @@
 using Exa.Ships;
 using UnityEngine;
 
-namespace Exa.UI.Tooltips
-{
-    public class VariableTooltipManager : MonoBehaviour
-    {
+namespace Exa.UI.Tooltips {
+    public class VariableTooltipManager : MonoBehaviour {
         public TooltipFactory tooltipGenerator;
         public BlockTemplateTooltip blockTemplateTooltip;
         public BlueprintTypeTooltip blueprintTypeTooltip;

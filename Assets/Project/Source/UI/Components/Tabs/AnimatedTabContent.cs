@@ -6,14 +6,12 @@ using UnityEngine;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI.Components
-{
-    public class AnimatedTabContent : MonoBehaviour
-    {
+namespace Exa.UI.Components {
+    public class AnimatedTabContent : MonoBehaviour {
         [SerializeField] private RectTransform rectTransform;
         [SerializeField] private CanvasGroup canvasGroup;
 
-        [Header("Settings")] 
+        [Header("Settings")]
         [SerializeField] private float duration = 0.25f;
         [SerializeField] private ActivePair<AnimationArgs> animArgs;
 
@@ -38,14 +36,14 @@ namespace Exa.UI.Components
                 .Replace(ref alphaTween);
 
             rectTransform.anchoredPosition = initialPos;
+
             rectTransform.DOAnchorPos(targetPos, duration)
                 .SetEase(args.ease)
                 .Replace(ref positionTween);
         }
 
         [Serializable]
-        public struct AnimationArgs
-        {
+        public struct AnimationArgs {
             public float targetAlpha;
             public float animAmplitude;
             public Ease ease;

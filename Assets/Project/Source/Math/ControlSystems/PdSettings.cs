@@ -1,10 +1,8 @@
 ﻿using System;
 
-namespace Exa.Math.ControlSystems
-{
+namespace Exa.Math.ControlSystems {
     [Serializable]
-    public struct PdSettings
-    {
+    public struct PdSettings {
         public float proportional;
         public float derivitive;
 

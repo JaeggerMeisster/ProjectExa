@@ -1,7 +1,5 @@
-﻿namespace Exa.Grids.Blueprints
-{
-    public class BlueprintContainerArgs
-    {
+﻿namespace Exa.Grids.Blueprints {
+    public class BlueprintContainerArgs {
         public Blueprint blueprint;
         public bool generateBlueprintFileHandle = true;
         public bool generateBlueprintFileName = true;

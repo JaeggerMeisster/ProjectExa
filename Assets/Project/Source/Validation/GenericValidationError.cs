@@ -1,17 +1,15 @@
-﻿namespace Exa.Validation
-{
-    public class GenericValidationError : ValidationError
-    {
-        public override string Id { get; }
-
+﻿namespace Exa.Validation {
+    public class GenericValidationError : ValidationError {
         public GenericValidationError(string id, string message) {
-            this.Id = id;
-            this.Message = message;
+            Id = id;
+            Message = message;
         }
 
         public GenericValidationError(string id, string message, ErrorType errorType)
             : this(id, message) {
-            this.ErrorType = errorType;
+            ErrorType = errorType;
         }
+
+        public override string Id { get; }
     }
 }

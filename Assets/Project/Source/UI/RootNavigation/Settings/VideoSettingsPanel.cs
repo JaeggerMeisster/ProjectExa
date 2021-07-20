@@ -1,35 +1,26 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using Exa.UI.Controls;
 using Exa.Utils;
 using UnityEngine;
 
-namespace Exa.UI.Settings
-{
-    public class VideoSettingsPanel : SettingsTab<ExaVideoSettings, VideoSettingsValues>
-    {
+namespace Exa.UI.Settings {
+    public class VideoSettingsPanel : SettingsTab<ExaVideoSettings, VideoSettingsValues> {
         public ResolutionDropdown resolutionDropdown;
         public DropdownControl refreshRatesDropdown;
         public RadioControl fullscreenRadio;
 
-        private void Awake() {
-            refreshRatesDropdown.OnValueChange.AddListener(obj => {
-                resolutionDropdown.FilterByRefreshRate((int) obj);
-                resolutionDropdown.SelectFirst();
-            });
-        }
-
-        public override VideoSettingsValues GetSettingsValues() =>
-            new VideoSettingsValues {
+        public override VideoSettingsValues GetSettingsValues() {
+            return new VideoSettingsValues {
                 resolution = (Resolution) resolutionDropdown.Value,
                 fullscreen = fullscreenRadio.Value
             };
+        }
 
         public override void ReflectValues(VideoSettingsValues values) {
             // TODO: Notify user of invalid configuration
-            if (!resolutionDropdown.ContainsItem(values.resolution))
-                values.resolution = settings.DefaultValues.resolution;
+            if (!resolutionDropdown.ContainsItem(values.resolution)) {
+                values.resolution = Container.DefaultValues.resolution;
+            }
 
             resolutionDropdown.SetValue(values.resolution, false);
             refreshRatesDropdown.SetValue(values.resolution.refreshRate, false);
@@ -37,14 +28,25 @@ namespace Exa.UI.Settings
         }
 
         public override void Init() {
-            settings.Resolutions = new Resolutions();
+            Container.Resolutions = new Resolutions();
 
-            refreshRatesDropdown.CreateTabs(settings.Resolutions
-                .GetRefreshRateLabels());
+            refreshRatesDropdown.CreateTabs(
+                Container.Resolutions
+                    .GetRefreshRateLabels()
+            );
 
-            resolutionDropdown.CreateTabs(settings.Resolutions
-                .GetResolutionLabels()
-                .Reverse());
+            refreshRatesDropdown.OnValueChange.AddListener(
+                obj => {
+                    resolutionDropdown.FilterByRefreshRate((int) obj);
+                    resolutionDropdown.SelectFirst();
+                }
+            );
+
+            resolutionDropdown.CreateTabs(
+                Container.Resolutions
+                    .GetResolutionLabels()
+                    .Reverse()
+            );
 
             // Get first refresh rate
             var firstRefreshRate = (int) refreshRatesDropdown.Value;
@@ -57,35 +59,43 @@ namespace Exa.UI.Settings
             const int length = 15;
             const string format = "Do you wish to keep these settings? (Reverting in {0} seconds)";
 
-            var currentValues = settings.Clone();
-            var setter = Systems.UI.promptController.PromptTextSetter;
-            var uiGroup = Systems.UI.root.interactableAdapter;
+            var backupValues = Container.Clone();
+            var setter = S.UI.Prompts.PromptTextSetter;
+            var uiGroup = S.UI.Root.interactableAdapter;
 
-            var coroutine = StartCoroutine(UpdatePromptCountdown(length, format, setter, () => {
-                Apply(currentValues);
-                ReflectValues(currentValues);
+            var prompt = null as Prompt;
 
-                Systems.UI.promptController.CleanupYesNo(uiGroup);
-            }));
+            var coroutine = EnumeratorUtils.OnceEverySecond(length, second => { setter(format.Format(length - second)); })
+                .Then(
+                    () => {
+                        Apply(backupValues);
+                        ReflectValues(backupValues);
 
-            Systems.UI.promptController.PromptYesNo(format.Format(length), uiGroup, value => {
-                StopCoroutine(coroutine);
-                if (value) return;
+                        prompt.CleanUp();
+                    }
+                )
+                .Start(this);
 
-                Apply(currentValues);
-                ReflectValues(currentValues);
-            });
+            prompt = S.UI.Prompts.PromptYesNo(
+                format.Format(length),
+                uiGroup,
+                value => {
+                    StopCoroutine(coroutine);
 
-            Apply(GetSettingsValues());
+                    if (value) {
+                        return;
+                    }
+
+                    Apply(backupValues);
+                    ReflectValues(backupValues);
+                }
+            );
+
+            base.ApplyChanges();
         }
 
-        private IEnumerator UpdatePromptCountdown(int length, string format, Action<string> setter, Action onCountdownEnd) {
-            for (var i = length; i > 0; i--) {
-                setter(format.Format(i));
-                yield return new WaitForSeconds(1);
-            }
-
-            onCountdownEnd();
+        protected override ExaVideoSettings GetSettingsContainer() {
+            return new ExaVideoSettings();
         }
     }
 }

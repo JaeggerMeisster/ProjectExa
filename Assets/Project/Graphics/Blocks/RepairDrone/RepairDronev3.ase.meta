@@ -1,0 +1,7 @@
+fileFormatVersion: 2
+guid: 178569f0c57d63e408373b0e6f712b1f
+DefaultImporter:
+  externalObjects: {}
+  userData: '{"layers":{"thrusters":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"thrusters"},"arms":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"arms"},"body-plate":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"body-plate"},"body-plate-overlay":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"body-plate-overlay"},"body-frame":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"body-frame"}}}'
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,13 +1,11 @@
-﻿using Exa.UI.Components;
-using System;
+﻿using System;
+using Exa.UI.Components;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Exa.UI.Tooltips
-{
+namespace Exa.UI.Tooltips {
     [Serializable]
-    public class TitleView : TooltipComponentView<TooltipTitle>
-    {
+    public class TitleView : TooltipComponentView<TooltipTitle> {
         [SerializeField] private Text text;
 
         public void SetFont(Font font) {

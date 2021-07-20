@@ -2,15 +2,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Exa.Ships
-{
-    public class ShipOverlayHullBar : MonoBehaviour
-    {
+namespace Exa.Ships {
+    public class ShipOverlayHullBar : MonoBehaviour {
         public Image actualFillImage;
         public Image rememberedFillImage;
+        [SerializeField] private readonly float rememberedFillSpeed = 0.4f;
 
         [SerializeField] private readonly float timeToUpdateRememberedFill = 3f;
-        [SerializeField] private readonly float rememberedFillSpeed = 0.4f;
         private float actualFill = 1f;
         private float rememberedFill = 1f;
         private float timeSinceFillChange;
@@ -41,7 +39,9 @@ namespace Exa.Ships
         }
 
         public void SetFill(float value) {
-            if (ActualFill == value) return;
+            if (ActualFill == value) {
+                return;
+            }
 
             ActualFill = value;
             timeSinceFillChange = 0f;

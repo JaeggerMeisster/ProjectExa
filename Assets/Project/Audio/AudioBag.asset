@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: AudioBag
   m_EditorClassIdentifier: 
   objects:
-  - {fileID: 11400000, guid: dccc669e2843782488b6ed8eb772cba7, type: 2}
   - {fileID: 11400000, guid: 911c51fedc82b49428337ae7075e4656, type: 2}
   - {fileID: 11400000, guid: b48159f68624a6f4785ccc1ca593a456, type: 2}
   - {fileID: 11400000, guid: bdaa7c8727d197444a1b1e9662639ac3, type: 2}
   - {fileID: 11400000, guid: 9aae5c7b23a755e4d93b870b00a802ed, type: 2}
   - {fileID: 11400000, guid: 39f12b02ccd77de41825bf98b2a7159c, type: 2}
+  filter: 2

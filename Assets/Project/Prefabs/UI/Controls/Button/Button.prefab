@@ -93,8 +93,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 350557258748702759}
-  activeColor: {r: 0.29411766, g: 0.7254902, b: 0.7053667, a: 1}
-  inactiveColor: {r: 0.74509805, g: 0.74509805, b: 0.7647059, a: 1}
   color:
     active: {r: 0.29411766, g: 0.7254902, b: 0.7053667, a: 1}
     inactive: {r: 0.74509805, g: 0.74509805, b: 0.7647059, a: 1}
@@ -114,6 +112,7 @@ GameObject:
   - component: {fileID: 7532406449157013280}
   - component: {fileID: 3272920608243847292}
   - component: {fileID: 1600893048667343851}
+  - component: {fileID: 79002215557044758}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -193,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -336,3 +336,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &79002215557044758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5259033962641442089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54039b4af8949c2b115f76c693da40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 5093804088955523567}
+  text: {fileID: 350557258748702759}
+  layoutElement: {fileID: 1600893048667343851}

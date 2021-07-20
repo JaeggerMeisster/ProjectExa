@@ -243,13 +243,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40bcd5a6fb36f8443b4ca9f352fbc92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  friendlyShipPrefab: {fileID: 6183172587043395867, guid: 3aea6e1a07124344f96c6f74c03a53bb,
-    type: 3}
   enemyShipPrefab: {fileID: 4004696302299950471, guid: 44ca71e0f5f540246803bc24780a9d64,
+    type: 3}
+  friendlyStationPrefab: {fileID: 6183172587043395867, guid: 3aea6e1a07124344f96c6f74c03a53bb,
     type: 3}
   shipOverlayPrefab: {fileID: 7302444608995301460, guid: 46737a4d95a0b474095ba4e71ce3f16a,
     type: 3}
-  overlayContainer: {fileID: 1813677412}
 --- !u!114 &2101903113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +310,11 @@ PrefabInstance:
       propertyPath: blockGridManager
       value: 
       objectReference: {fileID: 2101903113}
+    - target: {fileID: 3971752618548431353, guid: 5b47039535f26ce4a84ca29216ae1814,
+        type: 3}
+      propertyPath: gameplayInputManager
+      value: 
+      objectReference: {fileID: 4757615413908949387}
     - target: {fileID: 3971752618548431354, guid: 5b47039535f26ce4a84ca29216ae1814,
         type: 3}
       propertyPath: m_RootOrder
@@ -378,12 +382,15 @@ PrefabInstance:
       objectReference: {fileID: 2101903111}
     - target: {fileID: 4286009776099489547, guid: 5b47039535f26ce4a84ca29216ae1814,
         type: 3}
+      propertyPath: overlay
+      value: 
+      objectReference: {fileID: 1813677412}
+    - target: {fileID: 4286009776099489547, guid: 5b47039535f26ce4a84ca29216ae1814,
+        type: 3}
       propertyPath: projectiles
       value: 
       objectReference: {fileID: 1979375274}
-    m_RemovedComponents:
-    - {fileID: 3971752618548431352, guid: 5b47039535f26ce4a84ca29216ae1814, type: 3}
-    - {fileID: -5148195961969832546, guid: 5b47039535f26ce4a84ca29216ae1814, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b47039535f26ce4a84ca29216ae1814, type: 3}
 --- !u!114 &3971752619075410488 stripped
 MonoBehaviour:
@@ -861,6 +868,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64bc5546e16bfaf46aa70beef1bfc706, type: 3}
+--- !u!114 &4757615413908949387 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8696711327004652491, guid: 64bc5546e16bfaf46aa70beef1bfc706,
+    type: 3}
+  m_PrefabInstance: {fileID: 4757615413908949386}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b0122423b776e94dae13c2a9b3b4da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4757615413908949389 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4123047249362034627, guid: 64bc5546e16bfaf46aa70beef1bfc706,

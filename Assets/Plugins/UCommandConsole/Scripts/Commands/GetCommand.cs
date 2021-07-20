@@ -1,15 +1,14 @@
 ﻿using System;
 using UCommandConsole.Attributes;
 
-namespace UCommandConsole
-{
+namespace UCommandConsole {
     [IgnoreHistory]
-    internal class GetCommand : Command
-    {
-        public override string GetName() => "get";
-        
-        public override void Execute(Console host)
-        {
+    internal class GetCommand : Command {
+        public override string GetName() {
+            return "get";
+        }
+
+        public override void Execute(Console host) {
             throw new NotImplementedException();
         }
     }

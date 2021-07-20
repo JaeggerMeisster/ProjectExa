@@ -1,13 +1,11 @@
-﻿using TMPro;
+﻿using Exa.Math;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using Exa.Math;
 
-namespace Exa.Gameplay
-{
-    public class DamagePopup : MonoBehaviour
-    {
-        [Header("References")] 
+namespace Exa.Gameplay {
+    public class DamagePopup : MonoBehaviour {
+        [Header("References")]
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private TextMeshPro tmp;
 
@@ -18,7 +16,7 @@ namespace Exa.Gameplay
         [SerializeField] private float scaleMultiplier;
         [SerializeField] private float positionMultiplier;
 
-        [Header("Events")] 
+        [Header("Events")]
         public UnityEvent DestroyEvent;
 
         private float currentLifetime;
@@ -29,6 +27,21 @@ namespace Exa.Gameplay
             DestroyEvent = new UnityEvent();
         }
 
+        private void Update() {
+            currentLifetime += Time.deltaTime;
+
+            if (currentLifetime > maxLifetime) {
+                DestroyEvent.Invoke();
+                Destroy(gameObject);
+
+                return;
+            }
+
+            var time = currentLifetime / maxLifetime;
+            SetPosition(time);
+            SetScale(scaleAnimationCurve.Evaluate(time));
+        }
+
         public void Setup(Vector2 worldPosition, float damage, int order) {
             SetScale(scaleAnimationCurve.Evaluate(0f));
             transform.position = worldPosition.WithZ(-5f);
@@ -37,20 +50,6 @@ namespace Exa.Gameplay
             this.damage += damage;
             tmp.SetText(this.damage.Round().ToString());
             currentLifetime = 0f;
-        }
-
-        public void Update() {
-            currentLifetime += Time.deltaTime;
-
-            if (currentLifetime > maxLifetime) {
-                DestroyEvent.Invoke();
-                Destroy(gameObject);
-                return;
-            }
-
-            var time = currentLifetime / maxLifetime;
-            SetPosition(time);
-            SetScale(scaleAnimationCurve.Evaluate(time));
         }
 
         private void SetScale(float scale) {

@@ -1,20 +1,20 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Exa.IO
-{
-    public static partial class IOUtils
-    {
+namespace Exa.IO {
+    public static partial class IOUtils {
         public static bool TryBinaryDeserializeFromPath<T>(out T result, string filePath)
             where T : class {
             if (!File.Exists(filePath)) {
                 result = null;
+
                 return false;
             }
 
             using (var stream = File.OpenRead(filePath)) {
                 var formatter = new BinaryFormatter();
                 result = (T) formatter.Deserialize(stream);
+
                 return true;
             }
         }
@@ -22,6 +22,7 @@ namespace Exa.IO
         public static T BinaryDeserializeFromPath<T>(string filePath) {
             using (var stream = File.OpenRead(filePath)) {
                 var formatter = new BinaryFormatter();
+
                 return (T) formatter.Deserialize(stream);
             }
         }

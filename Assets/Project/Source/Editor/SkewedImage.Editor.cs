@@ -1,34 +1,29 @@
 ﻿using Exa.UI;
 using UnityEditor;
 using UnityEditor.UI;
+using UnityEngine.UI;
 
-namespace Exa.CustomEditors
-{
-    [CustomEditor(typeof(SkewedImage))]
-    public class SkewedImageEditor : ImageEditor
-    {
-        private SerializedProperty skewX;
-        private SerializedProperty skewY;
+namespace Exa.CustomEditors {
+    [CustomEditor(typeof(PixelSkewedImage), true)]
+    public class SkewedImageEditor : ImageEditor {
+        private SerializedProperty skew;
 
-        protected override void OnEnable()
-        {
+        protected override void OnEnable() {
             base.OnEnable();
 
-            skewX = serializedObject.FindProperty(nameof(SkewedImage.skewX));
-            skewY = serializedObject.FindProperty(nameof(SkewedImage.skewY));
+            skew = serializedObject.FindProperty(nameof(PixelSkewedImage.skew));
         }
 
-        public override void OnInspectorGUI()
-        {
+        public override void OnInspectorGUI() {
             base.OnInspectorGUI();
 
             serializedObject.Update();
 
+            (target as AngleSkewedImage)?.InvalidatePixels();
             // ReSharper disable once PossibleNullReferenceException
-            (target as SkewedImage).SetAllDirty();
+            (target as Graphic).SetAllDirty();
 
-            EditorGUILayout.PropertyField(skewX);
-            EditorGUILayout.PropertyField(skewY);
+            EditorGUILayout.PropertyField(skew);
 
             serializedObject.ApplyModifiedProperties();
         }

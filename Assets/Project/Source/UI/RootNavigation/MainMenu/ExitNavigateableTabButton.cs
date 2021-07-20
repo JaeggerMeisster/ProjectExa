@@ -1,15 +1,13 @@
 ﻿using Exa.UI.Components;
 
-namespace Exa.UI
-{
-    public class ExitNavigateableTabButton : Navigateable
-    {
+namespace Exa.UI {
+    public class ExitNavigateableTabButton : Navigateable {
         public override void HandleEnter(NavigationArgs args) {
             Exit();
         }
 
         public void Exit() {
-            Systems.Quit();
+            S.Quit();
         }
     }
 }

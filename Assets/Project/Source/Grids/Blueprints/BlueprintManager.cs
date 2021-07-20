@@ -1,30 +1,31 @@
-﻿using Exa.IO;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Exa.Bindings;
+using Exa.IO;
+using Exa.Types.Binding;
+using Exa.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Tree = Exa.IO.Tree;
 
 #pragma warning disable CS0649
 
-namespace Exa.Grids.Blueprints
-{
-    public class BlueprintManager : MonoBehaviour
-    {
+namespace Exa.Grids.Blueprints {
+    public class BlueprintManager : MonoBehaviour {
         [HideInInspector] public BlueprintContainerCollection userBlueprints = new BlueprintContainerCollection();
         [HideInInspector] public BlueprintContainerCollection defaultBlueprints = new BlueprintContainerCollection();
-        [HideInInspector] public CompositeObservableEnumerable<BlueprintContainer> useableBlueprints;
         public BlueprintTypeBag blueprintTypes;
 
-        [SerializeField] private DefaultBlueprintBag defaultBlueprintBag;
+        [FormerlySerializedAs("defaultBlueprintBag")] [SerializeField] private StaticBlueprintBag staticBlueprintBag;
+        [HideInInspector] public CompositeObservableEnumerable<BlueprintContainer> useableBlueprints;
 
         public IEnumerator Init(IProgress<float> progress) {
             var userBlueprintPaths = CollectionUtils
-                .GetJsonPathsFromDirectory(DirectoryTree.Blueprints)
+                .GetJsonPathsFromDirectory(Tree.Root.Blueprints)
                 .ToList();
 
-            var defaultBlueprintsList = defaultBlueprintBag.ToList();
+            var defaultBlueprintsList = staticBlueprintBag.ToList();
             var iterator = 0;
             var blueprintTotal = userBlueprintPaths.Count + defaultBlueprintsList.Count;
 
@@ -35,49 +36,57 @@ namespace Exa.Grids.Blueprints
             foreach (var blueprintPath in userBlueprintPaths) {
                 try {
                     AddUserBlueprint(blueprintPath);
-                }
-                catch (Exception e) {
-                    Systems.UI.logger.Log($"Error loading blueprint: {e.Message}");
+                } catch (Exception e) {
+                    S.UI.Logger.LogException($"Error loading blueprint: {e.Message}", false);
                 }
 
-                yield return null;
+                yield return new WorkUnit();
+
                 iterator++;
                 progress.Report((float) iterator / blueprintTotal);
             }
-
 
             // Load default blueprints
-            foreach (var defaultBlueprint in defaultBlueprintBag) {
+            foreach (var defaultBlueprint in staticBlueprintBag) {
                 AddDefaultBlueprint(defaultBlueprint);
 
-                yield return null;
+                yield return new WorkUnit();
+
                 iterator++;
                 progress.Report((float) iterator / blueprintTotal);
             }
 
-            yield return null;
+            yield return new WorkUnit();
         }
 
         public Blueprint GetBlueprint(string name) {
-            if (defaultBlueprints.ContainsKey(name))
+            if (defaultBlueprints.ContainsKey(name)) {
                 return defaultBlueprints[name].Data;
+            }
 
-            if (userBlueprints.ContainsKey(name))
+            if (userBlueprints.ContainsKey(name)) {
                 return userBlueprints[name].Data;
+            }
 
-            throw new KeyNotFoundException();
+            throw new KeyNotFoundException($"Name: \"{name}\" not found");
         }
 
         public bool ContainsName(string name) {
-            return defaultBlueprints.ContainsKey(name)
-                   || userBlueprints.ContainsKey(name);
+            return GetBlueprintNames().Contains(name);
         }
 
-        private void AddDefaultBlueprint(DefaultBlueprint defaultBlueprint) {
-            var blueprint = defaultBlueprint.ToContainer();
+        public IEnumerable<string> GetBlueprintNames() {
+            return defaultBlueprints
+                .Concat(userBlueprints)
+                .Select(blueprint => blueprint.Data.name);
+        }
 
-            if (ContainsName(blueprint.Data.name))
+        private void AddDefaultBlueprint(StaticBlueprint staticBlueprint) {
+            var blueprint = staticBlueprint.GetContainer();
+
+            if (ContainsName(blueprint.Data.name)) {
                 throw new ArgumentException("Blueprint named is duplicate");
+            }
 
             defaultBlueprints.Add(blueprint);
         }
@@ -98,8 +107,12 @@ namespace Exa.Grids.Blueprints
                 generateBlueprintFileName = false
             };
 
-            var observableBlueprint = new BlueprintContainer(args);
-            observableBlueprint.BlueprintFileHandle.CurrentPath = path;
+            var observableBlueprint = new BlueprintContainer(args) {
+                BlueprintFileHandle = {
+                    CurrentPath = path
+                }
+            };
+
             observableBlueprint.LoadThumbnail();
             userBlueprints.Add(observableBlueprint);
         }

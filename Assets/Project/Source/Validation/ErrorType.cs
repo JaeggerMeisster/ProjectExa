@@ -1,7 +1,5 @@
-﻿namespace Exa.Validation
-{
-    public enum ErrorType
-    {
+﻿namespace Exa.Validation {
+    public enum ErrorType {
         Error,
         Warning,
         Suggestion

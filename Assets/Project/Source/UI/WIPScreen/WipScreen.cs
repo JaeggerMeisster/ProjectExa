@@ -5,11 +5,9 @@ using Exa.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Exa.UI
-{
-    public class WipScreen : MonoBehaviour
-    {
-        [Header("References")] 
+namespace Exa.UI {
+    public class WipScreen : MonoBehaviour {
+        [Header("References")]
         [SerializeField] private CanvasGroup rootCanvasGroup;
         [SerializeField] private CanvasGroup textCanvasGroup;
         [SerializeField] private GameObject wordPrefab;
@@ -17,24 +15,25 @@ namespace Exa.UI
         [SerializeField] private RectTransform wordContainer;
         [SerializeField] private HorizontalLayoutGroup wordLayoutGroup;
 
-        [Header("Settings")] 
+        [Header("Settings")]
         [SerializeField] private bool forceShowScreen;
         [SerializeField] private AnimSettings animSettings;
-
-        private Tween titleSpacingTween;
         private Tween textContainerScaleTween;
 
+        private Tween titleSpacingTween;
+
         public void Init() {
-            if (GetShouldShowScreen())
+            if (GetShouldShowScreen()) {
                 ShowScreen();
+            }
         }
 
         private bool GetShouldShowScreen() {
-#if !UNITY_EDITOR
+        #if !UNITY_EDITOR
             return true;
-#else
+        #else
             return forceShowScreen;
-#endif
+        #endif
         }
 
         private void ShowScreen() {
@@ -56,18 +55,23 @@ namespace Exa.UI
 
         private void GenerateTitle(bool scrollAnimation) {
             var charCount = 0;
+
             foreach (var word in animSettings.message.Split(' ')) {
                 var go = Instantiate(wordPrefab, wordContainer);
                 var text = go.GetComponent<Text>();
+
                 if (scrollAnimation) {
                     text.text = "";
                     var animator = go.AddComponent<TextAnimator>();
                     animator.CharTime = animSettings.charTime;
-                    this.Delay(() => animator.AnimateTo(word),
-                        charCount * animSettings.charTime + animSettings.textFadeEnter.delay);
-                }
-                else
+
+                    this.Delay(
+                        () => animator.AnimateTo(word),
+                        charCount * animSettings.charTime + animSettings.textFadeEnter.delay
+                    );
+                } else {
                     text.text = word;
+                }
 
                 charCount += word.Length;
             }
@@ -84,14 +88,14 @@ namespace Exa.UI
             //    .SetEase(args.ease);
 
             var scale = new Vector3(args.scale, args.scale, 1f);
+
             textContainer.DOScale(scale, args.duration)
                 .SetEase(args.ease)
                 .Replace(ref textContainerScaleTween);
         }
 
         [Serializable]
-        public struct AnimSettings
-        {
+        public struct AnimSettings {
             public TextFadeEnterArgs textFadeEnter;
             public TextGrowthArgs textGrowthEnter;
             public TextGrowthArgs textGrowthExit;
@@ -102,16 +106,14 @@ namespace Exa.UI
             public string message;
 
             [Serializable]
-            public struct TextFadeEnterArgs
-            {
+            public struct TextFadeEnterArgs {
                 public float delay;
                 public float duration;
                 public ExaEase ease;
             }
 
             [Serializable]
-            public struct TextGrowthArgs
-            {
+            public struct TextGrowthArgs {
                 public float duration;
                 public float scale;
                 public float spacing;

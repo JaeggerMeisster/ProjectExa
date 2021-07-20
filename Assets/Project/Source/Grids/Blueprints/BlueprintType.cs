@@ -1,24 +1,19 @@
-﻿using Exa.Generics;
+﻿using System;
 using Exa.Grids.Blocks;
+using Exa.Types.Generics;
 using Exa.UI.Tooltips;
-using System;
 using UnityEngine;
 
-namespace Exa.Grids.Blueprints
-{
+namespace Exa.Grids.Blueprints {
     [Serializable]
     [CreateAssetMenu(fileName = "BlueprintType", menuName = "Grids/Blueprints/BlueprintType")]
-    public class BlueprintType : ScriptableObject, ITooltipPresenter, ILabeledValue<BlueprintType>
-    {
+    public class BlueprintType : ScriptableObject, ITooltipPresenter, ILabeledValue<BlueprintType> {
         public BlueprintTypeGuid typeGuid;
         public string displayName;
         public Vector2Int maxSize;
-        public BlockCategory disallowedBlockCategories;
+        public BlockCategory allowedBlockCategory;
 
         private Tooltip tooltipResult;
-
-        public string Label => displayName;
-        public BlueprintType Value => this;
 
         public bool IsMothership {
             get => typeGuid == BlueprintTypeGuid.mothership;
@@ -28,12 +23,24 @@ namespace Exa.Grids.Blueprints
             tooltipResult = new Tooltip(GetTooltipGroup);
         }
 
+        public string Label {
+            get => displayName;
+        }
+
+        public BlueprintType Value {
+            get => this;
+        }
+
         public Tooltip GetTooltip() {
             return tooltipResult;
         }
 
-        private TooltipGroup GetTooltipGroup() => new TooltipGroup(new ITooltipComponent[] {
-            new LabeledValue<object>("Max size", $"{maxSize.x}x{maxSize.y}")
-        });
+        private TooltipGroup GetTooltipGroup() {
+            return new TooltipGroup(
+                new ITooltipComponent[] {
+                    new LabeledValue<object>("Max size", $"{maxSize.x}x{maxSize.y}")
+                }
+            );
+        }
     }
 }

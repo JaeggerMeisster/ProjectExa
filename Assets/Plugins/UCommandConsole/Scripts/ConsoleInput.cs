@@ -7,15 +7,11 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
-namespace UCommandConsole
-{
+namespace UCommandConsole {
     [Serializable]
-    public class OutputEvent : UnityEvent<string>
-    {
-    }
+    public class OutputEvent : UnityEvent<string> { }
 
-    public class ConsoleInput : MonoBehaviour
-    {
+    public class ConsoleInput : MonoBehaviour {
         [Space]
         [SerializeField] private InputField inputField;
 
@@ -25,34 +21,31 @@ namespace UCommandConsole
         [Space]
         public OutputEvent submit = new OutputEvent();
 
-        private void Awake()
-        {
+        private void Awake() {
             submitAction.performed += OnSubmit;
         }
 
-        public void Focus()
-        {
-            inputField.ActivateInputField();
-        }
-
-        private void OnEnable()
-        {
+        private void OnEnable() {
             submitAction.Enable();
             Focus();
         }
 
-        private void OnDisable()
-        {
+        private void OnDisable() {
             submitAction.Disable();
         }
 
-        private void OnSubmit(CallbackContext context)
-        {
-            if (!inputField.isFocused) return;
+        public void Focus() {
+            inputField.ActivateInputField();
+        }
 
-            if (inputField.text == "")
-            {
+        private void OnSubmit(CallbackContext context) {
+            if (!inputField.isFocused) {
+                return;
+            }
+
+            if (inputField.text == "") {
                 inputField.ActivateInputField();
+
                 return;
             }
 

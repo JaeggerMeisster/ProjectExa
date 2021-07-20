@@ -1,13 +1,11 @@
-﻿using Exa.Gameplay;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Exa.Gameplay;
 using UnityEngine;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI.Gameplay
-{
-    public class SelectionHotbar : MonoBehaviour
-    {
+namespace Exa.UI.Gameplay {
+    public class SelectionHotbar : MonoBehaviour {
         [SerializeField] private Transform container;
         [SerializeField] private GameObject selectionHotbarItemPrefab;
         private Dictionary<int, SelectionHotbarItem> itemDict;
@@ -39,6 +37,7 @@ namespace Exa.UI.Gameplay
             // If the selected index is the same as the current, treat it as it should be deselected
             if (selectedIndex == index) {
                 selectedIndex = -1;
+
                 return null;
             }
 
@@ -47,6 +46,7 @@ namespace Exa.UI.Gameplay
             if (IsInRange(selectedIndex)) {
                 var selection = itemDict[index];
                 selection.Selected = true;
+
                 return Clone(selection.ShipSelection);
             }
 
@@ -55,6 +55,7 @@ namespace Exa.UI.Gameplay
 
         public void Save(ShipSelection selection, int? pIndex = null) {
             var index = pIndex ?? selectedIndex;
+
             if (index >= 0 && index <= 9) {
                 var item = itemDict[index];
                 item.ShipSelection = Clone(selection);
@@ -62,8 +63,9 @@ namespace Exa.UI.Gameplay
         }
 
         private void CreatePrefabs() {
-            for (int i = 1; i < 10; i++)
+            for (var i = 1; i < 10; i++) {
                 CreatePrefab(i);
+            }
 
             CreatePrefab(0);
         }

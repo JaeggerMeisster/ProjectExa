@@ -1,47 +1,25 @@
 ﻿using System;
-using Exa.Grids.Blocks.BlockTypes;
+using Exa.Data;
 using Exa.Grids.Blueprints;
 using UnityEngine;
 
-namespace Exa.Ships.Navigation
-{
-    public enum NavigationType
-    {
+namespace Exa.Ships.Navigation {
+    public enum NavigationType {
         Simple,
         Directional,
         NewDirectional
     }
 
-    public class NavigationOptions : MonoBehaviour
-    {
-        [Header("Options")] 
-        public bool continuouslyApplySettings;
+    public class NavigationOptions : MonoBehaviour {
+        [Header("Options")]
         public NavigationType navigationType;
 
-        [Header("PID-Quaternion-parameters")] 
-        public float qProportionalBase;
-        public float qIntegral;
-        public float qDerivative;
-
-        [Header("PD-Position-parameters")] 
-        public float pProportional;
-        public float pDerivative;
-        public float maxVel;
-
-        public INavigation GetNavigation(Ship ship, Blueprint blueprint) {
-            var template = blueprint.Blocks.Controller.BlueprintBlock.Template as ControllerTemplate;
-            var controllerValues = template.controllerTemplatePartial.Convert();
-
-            switch (navigationType) {
-                case NavigationType.Simple:
-                    return new SimpleNavigation(ship, this, controllerValues.thrustModifier);
-
-                case NavigationType.Directional:
-                    return new DirectionalNavigation(ship, this, controllerValues.thrustModifier);
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(navigationType));
-            }
+        public INavigation GetNavigation(GridInstance gridInstance, Blueprint blueprint) {
+            return navigationType switch {
+                NavigationType.Simple => new SimpleNavigation(gridInstance, this, new Scalar(1)),
+                NavigationType.Directional => new DirectionalNavigation(gridInstance, this, new Scalar(1)),
+                _ => throw new ArgumentOutOfRangeException(nameof(navigationType))
+            };
         }
     }
 }

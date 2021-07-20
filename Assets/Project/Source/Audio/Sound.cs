@@ -1,46 +1,30 @@
 ﻿using UnityEngine;
 
-namespace Exa.Audio
-{
+namespace Exa.Audio {
     /// <summary>
-    /// Supports an audioclip with additional properties that gives audio tracks more context
+    ///     Supports an audioclip with additional properties that gives audio tracks more context
     /// </summary>
     [CreateAssetMenu(menuName = "Audio/Sound")]
-    public class Sound : ScriptableObject
-    {
-        /// <summary>
-        /// Global audio identifier
-        /// </summary>
-        public string id;
+    public class Sound : ScriptableObject, ISound {
+        [SerializeField] private string id;
+        [SerializeField] private AudioType audioType;
+        [SerializeField] private AudioClip audioClip;
+        [SerializeField] private SoundConfig soundConfig;
 
-        /// <summary>
-        /// Type of the audio object
-        /// </summary>
-        public AudioType audioType;
+        public string Id {
+            get => id;
+        }
 
-        /// <summary>
-        /// Clip of the audio object
-        /// </summary>
-        public AudioClip audioClip;
+        public AudioType AudioType {
+            get => audioType;
+        }
 
-        /// <summary>
-        /// Volume the clip should be played at
-        /// </summary>
-        public float volume = 1f;
+        public AudioClip AudioClip {
+            get => audioClip;
+        }
 
-        /// <summary>
-        /// Pitch the clip should be played at
-        /// </summary>
-        public float pitch = 1f;
-
-        /// <summary>
-        /// Wether or not it cancels other sounds playing on the current track
-        /// </summary>
-        public bool allowMultipleOnTrack = true;
-
-        /// <summary>
-        /// Wether or not multiple sounds of this type can be played simoultaniously
-        /// </summary>
-        public bool allowMultipleOfType = true;
+        public SoundConfig Config {
+            get => soundConfig;
+        }
     }
 }

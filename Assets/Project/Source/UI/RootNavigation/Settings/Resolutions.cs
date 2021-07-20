@@ -1,19 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Exa.Generics;
 using Exa.Math;
+using Exa.Types.Generics;
 using UnityEngine;
 
-namespace Exa.UI.Settings
-{
+namespace Exa.UI.Settings {
     /// <summary>
-    /// A list of resolutions, sorted by resolution size and refresh rate
+    ///     A list of resolutions, sorted by resolution size and refresh rate
     /// </summary>
-    public class Resolutions : IEnumerable<Resolution>
-    {
+    public class Resolutions : IEnumerable<Resolution> {
+        private readonly int[] acceptedRefreshRates = {
+            60,
+            75,
+            80,
+            90,
+            100,
+            120,
+            144,
+            165,
+            180,
+            240
+        };
         private readonly List<Resolution> resolutions;
-        private readonly int[] acceptedRefreshRates = {60, 75, 80, 90, 100, 120, 144, 165, 180, 240};
 
         public Resolutions() {
             var filteredResolutions = Screen
@@ -22,14 +31,29 @@ namespace Exa.UI.Settings
                 .Where(IsAcceptedRatio);
 
             // If the are no selected resolutions,
-            if (!filteredResolutions.Any())
+            if (!filteredResolutions.Any()) {
                 filteredResolutions = Screen.resolutions;
+            }
 
             resolutions = new List<Resolution>(filteredResolutions);
-            resolutions.Sort((x, y) => {
-                int GetValue(Resolution res) => res.width * res.height + res.refreshRate;
-                return GetValue(x) - GetValue(y);
-            });
+
+            resolutions.Sort(
+                (x, y) => {
+                    int GetValue(Resolution res) {
+                        return res.width * res.height + res.refreshRate;
+                    }
+
+                    return GetValue(x) - GetValue(y);
+                }
+            );
+        }
+
+        public IEnumerator<Resolution> GetEnumerator() {
+            return resolutions.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
         }
 
         public Resolution GetHighestSupportedResolution() {
@@ -41,24 +65,20 @@ namespace Exa.UI.Settings
         }
 
         public IEnumerable<ILabeledValue<object>> GetResolutionLabels() {
-            return this.Select(res =>
-                new LabeledValue<object>($"{res.width}x{res.height}", res) as ILabeledValue<object>);
+            return this.Select(
+                res =>
+                    new LabeledValue<object>($"{res.width}x{res.height}", res) as ILabeledValue<object>
+            );
         }
 
         public IEnumerable<ILabeledValue<object>> GetRefreshRateLabels() {
             return this.Select(res => res.refreshRate)
                 .Distinct()
                 .OrderByDescending(res => res)
-                .Select(res =>
-                    new LabeledValue<object>($"{res} hz", res) as ILabeledValue<object>);
-        }
-
-        public IEnumerator<Resolution> GetEnumerator() {
-            return resolutions.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator() {
-            return GetEnumerator();
+                .Select(
+                    res =>
+                        new LabeledValue<object>($"{res} hz", res) as ILabeledValue<object>
+                );
         }
 
         private bool IsAcceptedRefreshRate(Resolution resolution) {
@@ -66,10 +86,12 @@ namespace Exa.UI.Settings
         }
 
         private bool IsAcceptedRatio(Resolution resolution) {
-            var ratio = MathUtils.GetRatio(new Vector2Int {
-                x = resolution.width,
-                y = resolution.height
-            });
+            var ratio = MathUtils.GetRatio(
+                new Vector2Int {
+                    x = resolution.width,
+                    y = resolution.height
+                }
+            );
 
             return
                 IsRatio(ratio, 21, 9) ||

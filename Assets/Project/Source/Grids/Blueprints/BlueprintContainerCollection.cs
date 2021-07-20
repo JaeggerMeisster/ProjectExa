@@ -1,17 +1,17 @@
-﻿using Exa.Generics;
-using System;
+﻿using System;
+using Exa.Types.Generics;
+using UnityEngine;
 
-namespace Exa.Grids.Blueprints
-{
+namespace Exa.Grids.Blueprints {
     [Serializable]
-    public class BlueprintContainerCollection : ObservableDictionary<string, BlueprintContainer>
-    {
+    public class BlueprintContainerCollection : ObservableDictionary<string, BlueprintContainer> {
         public BlueprintContainerCollection()
             : base(StringComparer.OrdinalIgnoreCase) { }
 
         public override void Add(BlueprintContainer item) {
             if (Contains(item)) {
-                UnityEngine.Debug.LogWarning($"Blueprint: {item.Data.name} has already been added");
+                Debug.LogWarning($"Blueprint: {item.Data.name} has already been added");
+
                 return;
             }
 

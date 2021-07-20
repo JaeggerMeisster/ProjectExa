@@ -123,6 +123,6 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Text
-    value: Blueprint name
+    value: Placeholder
     objectReference: {fileID: 0}
   m_ExcludedProperties: []

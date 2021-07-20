@@ -1,0 +1,7 @@
+fileFormatVersion: 2
+guid: 630bda7de322c8c4eabc9eb58cd28c73
+DefaultImporter:
+  externalObjects: {}
+  userData: '{"layers":{"thrusters":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"thrusters"},"arms":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"arms"},"body-plate":{"mergeUp":false,"exportOnlyFirstFrame":false,"name":"body-plate"},"body-frame":{"mergeUp":true,"exportOnlyFirstFrame":false,"name":"body-frame"}}}'
+  assetBundleName: 
+  assetBundleVariant: 

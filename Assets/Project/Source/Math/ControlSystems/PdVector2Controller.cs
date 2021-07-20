@@ -1,44 +1,30 @@
 ﻿using UnityEngine;
 
-namespace Exa.Math.ControlSystems
-{
-    public class PdVector2Controller
-    {
-        private float proportional;
-        private float maxVel;
-        private float derivitive;
-
-        public float Proportional {
-            get => proportional;
-            set => proportional = value;
-        }
-
-        public float Derivitive {
-            get => derivitive;
-            set => derivitive = value;
-        }
-
-        public float MaxVel {
-            get => maxVel;
-            set => maxVel = value;
-        }
-
+namespace Exa.Math.ControlSystems {
+    public class PdVector2Controller {
         public PdVector2Controller(float proportional, float derivitive, float maxVel) {
-            this.proportional = proportional;
-            this.derivitive = derivitive;
-            this.maxVel = maxVel;
+            Proportional = proportional;
+            Derivitive = derivitive;
+            MaxVel = maxVel;
         }
+
+        public float Proportional { get; set; }
+
+        public float Derivitive { get; set; }
+
+        public float MaxVel { get; set; }
 
         public void SetSettings(PdSettings pdSettings) {
-            this.Proportional = pdSettings.proportional;
-            this.Derivitive = pdSettings.derivitive;
+            Proportional = pdSettings.proportional;
+            Derivitive = pdSettings.derivitive;
         }
 
         public Vector2 CalculateRequiredVelocity(Vector2 currentPos, Vector2 targetPos, Vector2 currentVelocity) {
             var dist = targetPos - currentPos;
-            var targetVel = Vector2.ClampMagnitude(proportional * dist, maxVel);
+            var targetVel = Vector2.ClampMagnitude(Proportional * dist, MaxVel);
             var error = targetVel - currentVelocity;
-            return derivitive * error;
+
+            return Derivitive * error;
         }
     }
 }

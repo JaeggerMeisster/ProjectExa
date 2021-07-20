@@ -15,4 +15,4 @@ MonoBehaviour:
   typeGuid: 5
   displayName: Scout
   maxSize: {x: 8, y: 5}
-  disallowedBlockCategories: 32
+  allowedBlockCategory: 95

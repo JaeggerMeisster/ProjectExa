@@ -2,11 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Exa.UI.Tooltips
-{
+namespace Exa.UI.Tooltips {
     [Serializable]
-    public class TextView : TooltipComponentView<TooltipText>
-    {
+    public class TextView : TooltipComponentView<TooltipText> {
         [SerializeField] private Text text;
 
         public void SetFont(Font font) {

@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Exa.Utils
-{
-    public static partial class TypeUtils
-    {
+namespace Exa.Utils {
+    public static class TypeUtils {
         public static IEnumerable<Func<TObject, TMember>> GetPropertyGetters<TObject, TMember>(Type objectType = null) {
             if (objectType == null) {
                 objectType = typeof(TObject);
-            }
-            else {
+            } else {
                 if (!typeof(TObject).IsAssignableFrom(objectType)) {
                     throw new Exception("Type mismatch");
                 }
@@ -24,6 +21,7 @@ namespace Exa.Utils
                     var getMethod = propertyInfo.GetGetMethod();
                     var instance = Expression.Convert(input, objectType);
                     var methodCall = Expression.Call(instance, getMethod);
+
                     yield return Expression.Lambda<Func<TObject, TMember>>(methodCall, input).Compile();
                 }
             }

@@ -18,16 +18,26 @@ MonoBehaviour:
   thumbnail: {fileID: 4028293609388341736, guid: b83defb4a441e484193ddcc29009f684,
     type: 3}
   size: {x: 1, y: 1}
+  metadata:
+    strength: 8
+    blockCosts:
+      creditCost: 100
+      metalsCost: 2
   inertPrefab: {fileID: 3381617769083692569, guid: 32232d525af1553449ae80920da2fe74,
     type: 3}
   alivePrefab: {fileID: 5632532741842114357, guid: 67dc6d15d140c08438680a80282db6af,
     type: 3}
-  physicalTemplatePartial:
-    maxHull: 50
-    armor: 15
-    mass: 3
-  autocannonTemplatePartial:
-    turningRate: 100
-    firingRate: 0.5
-    damage: 80
-    cycleMode: 0
+  physicalPartial:
+    data:
+      hull: 50
+      armor: 15
+      mass: 3
+  autocannonPartial:
+    data:
+      turningRate: 100
+      firingRate: 150
+      turretArc: 200
+      turretRadius: 1.375
+      damage: 80
+      range: 300
+      cycleMode: 0

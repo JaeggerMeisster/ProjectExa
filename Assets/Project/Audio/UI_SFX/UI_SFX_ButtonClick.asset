@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: UI_SFX_ButtonClick
   m_EditorClassIdentifier: 
   id: UI_SFX_ButtonClick
-  audioType: 1
+  audioType: 2
   audioClip: {fileID: 8300000, guid: eba7e061ee425324ba97e904885bc9ea, type: 3}
-  volume: 0.6
-  pitch: 1
-  allowMultipleOnTrack: 1
-  allowMultipleOfType: 0
+  soundConfig:
+    volume: 0.6
+    pitch: 1
+    allowMultipleOfType: 1
+    allowMultipleOnTrack: 0

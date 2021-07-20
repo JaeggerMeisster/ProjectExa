@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Exa.Ships.Targeting
-{
-    public readonly struct StaticPositionTarget : ITarget
-    {
+namespace Exa.Ships.Targeting {
+    public readonly struct StaticPositionTarget : ITarget {
         private readonly Vector2 position;
 
         public StaticPositionTarget(Vector2 position) {

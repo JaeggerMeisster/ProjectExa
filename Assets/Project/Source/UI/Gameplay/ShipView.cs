@@ -1,22 +1,20 @@
-﻿using Exa.Ships;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Exa.Ships;
 using UnityEngine;
 using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI.Gameplay
-{
-    public class ShipView : MonoBehaviour
-    {
+namespace Exa.UI.Gameplay {
+    public class ShipView : MonoBehaviour {
         [SerializeField] private Gradient colorGradient;
         [SerializeField] private Text countText;
         [SerializeField] private Slider slider;
         [SerializeField] private Image sliderImage;
         [SerializeField] private Image thumbnailImage;
+        private readonly List<GridInstance> ships = new List<GridInstance>();
         private int count;
-        private readonly List<Ship> ships = new List<Ship>();
 
         public int Count {
             get => count;
@@ -27,7 +25,7 @@ namespace Exa.UI.Gameplay
         }
 
         private void Update() {
-            var total = ships.Average(ship => ship.State.HullIntegrity);
+            var total = ships.Average(ship => ship.HullIntegrity);
             SetHull(total);
         }
 
@@ -37,13 +35,13 @@ namespace Exa.UI.Gameplay
             thumbnailImage.sprite = Sprite.Create(thumbnail, thumbnailRect, thumbnailPivot);
         }
 
-        public void Add(Ship ship) {
-            ships.Add(ship);
+        public void Add(GridInstance gridInstance) {
+            ships.Add(gridInstance);
             Count++;
         }
 
-        public void Remove(Ship ship) {
-            ships.Remove(ship);
+        public void Remove(GridInstance gridInstance) {
+            ships.Remove(gridInstance);
             Count--;
         }
 

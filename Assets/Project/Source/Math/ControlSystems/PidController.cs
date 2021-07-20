@@ -1,25 +1,23 @@
 using System;
 using UnityEngine;
 
-namespace Exa.Math.ControlSystems
-{
-    public class PidController
-    {
+namespace Exa.Math.ControlSystems {
+    public class PidController {
         private const float MaxOutput = 1000.0f;
-
-        private float calculatedIntegralMax;
         private float calculatedIntegral;
 
-        private float proportional;
-        private float integral;
+        private float calculatedIntegralMax;
         private float derivitive;
+        private float integral;
+
+        private float proportional;
 
         public PidController(float proportional, float integral, float derivitive) {
             Proportional = proportional;
             Integral = integral;
             Derivitive = derivitive;
 
-            this.calculatedIntegralMax = MaxOutput / Integral;
+            calculatedIntegralMax = MaxOutput / Integral;
         }
 
         public float Proportional {
@@ -37,9 +35,13 @@ namespace Exa.Math.ControlSystems
 
                 integral = value;
 
-                this.calculatedIntegralMax = MaxOutput / Integral;
-                this.calculatedIntegral = Mathf.Clamp(this.calculatedIntegral, -this.calculatedIntegralMax,
-                    this.calculatedIntegralMax);
+                calculatedIntegralMax = MaxOutput / Integral;
+
+                calculatedIntegral = Mathf.Clamp(
+                    calculatedIntegral,
+                    -calculatedIntegralMax,
+                    calculatedIntegralMax
+                );
             }
         }
 
@@ -53,17 +55,21 @@ namespace Exa.Math.ControlSystems
             get => derivitive;
             set {
                 EnsureNonNegative(value, "Derivative");
-                this.derivitive = value;
+                derivitive = value;
             }
         }
 
         public float ComputeOutput(float error, float delta, float deltaTime) {
-            this.calculatedIntegral += (error * deltaTime);
-            this.calculatedIntegral = Mathf.Clamp(this.calculatedIntegral, -this.calculatedIntegralMax,
-                this.calculatedIntegralMax);
+            calculatedIntegral += error * deltaTime;
 
-            float derivative = delta / deltaTime;
-            float output = (Proportional * error) + (Integral * this.calculatedIntegral) + (Derivitive * derivative);
+            calculatedIntegral = Mathf.Clamp(
+                calculatedIntegral,
+                -calculatedIntegralMax,
+                calculatedIntegralMax
+            );
+
+            var derivative = delta / deltaTime;
+            var output = Proportional * error + Integral * calculatedIntegral + Derivitive * derivative;
 
             output = Mathf.Clamp(output, -MaxOutput, MaxOutput);
 

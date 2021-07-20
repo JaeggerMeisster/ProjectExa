@@ -1,20 +1,19 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Exa.Debugging
-{
-    public class DebugDragger : MonoBehaviour
-    {
+namespace Exa.Debugging {
+    public class DebugDragger : MonoBehaviour {
+        private readonly float sampleTime = 0.2f;
+        private Vector2 averagedVelocity;
         private IDebugDragable currentDragable;
         private Vector2 offset;
-        private Vector2 averagedVelocity;
-        private float sampleTime = 0.2f;
 
         public void Update() {
-            if (currentDragable == null) return;
+            if (currentDragable == null) {
+                return;
+            }
 
             // Set the velocity
-            var mouseWorldPoint = Systems.Input.MouseWorldPoint;
+            var mouseWorldPoint = S.Input.MouseWorldPoint;
             var velocity = currentDragable.GetDebugDraggerPosition() - offset - mouseWorldPoint;
             AverageVelocity(-velocity, sampleTime);
 
@@ -23,12 +22,14 @@ namespace Exa.Debugging
         }
 
         public void OnPress() {
-            if (!TryGetDebugDragable(out var dragable)) return;
+            if (!TryGetDebugDragable(out var dragable)) {
+                return;
+            }
 
             currentDragable = dragable;
             averagedVelocity = Vector2.zero;
 
-            var mouseWorldPoint = Systems.Input.MouseWorldPoint;
+            var mouseWorldPoint = S.Input.MouseWorldPoint;
             var currentPoint = currentDragable.GetDebugDraggerPosition();
 
             offset = currentPoint - mouseWorldPoint;
@@ -36,9 +37,11 @@ namespace Exa.Debugging
         }
 
         public void OnRelease() {
-            if (currentDragable == null) return;
+            if (currentDragable == null) {
+                return;
+            }
 
-            var mouseWorldPoint = Systems.Input.MouseWorldPoint;
+            var mouseWorldPoint = S.Input.MouseWorldPoint;
             var targetPoint = mouseWorldPoint + offset;
             currentDragable.SetDebugDraggerGlobals(targetPoint, averagedVelocity);
             currentDragable = null;
@@ -56,11 +59,12 @@ namespace Exa.Debugging
 
         private static bool TryGetDebugDragable(out IDebugDragable dragable) {
             try {
-                return GameSystems.Raycaster.TryGetTarget(out dragable);
+                return GS.Raycaster.TryGetTarget(out dragable);
             }
             // ReSharper disable once EmptyGeneralCatchClause
             catch {
                 dragable = null;
+
                 return false;
             }
         }

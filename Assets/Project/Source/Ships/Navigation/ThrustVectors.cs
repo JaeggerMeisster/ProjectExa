@@ -1,34 +1,37 @@
-﻿using Exa.Grids.Blocks.BlockTypes;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Exa.Data;
+using Exa.Grids.Blocks.Components;
 using UnityEngine;
 
-namespace Exa.Ships.Navigation
-{
+namespace Exa.Ships.Navigation {
     // TODO: Clamp the requested thrust vector to what the Ship can output
-    public class ThrustVectors : IThrustVectors
-    {
+    public class ThrustVectors : IThrustVectors {
         private readonly Dictionary<int, ThrusterGroup> thrusterDict;
 
         public ThrustVectors(Scalar thrustModifier) {
             thrusterDict = new Dictionary<int, ThrusterGroup> {
-                {0, new ThrusterGroup(thrustModifier)},
-                {1, new ThrusterGroup(thrustModifier)},
-                {2, new ThrusterGroup(thrustModifier)},
-                {3, new ThrusterGroup(thrustModifier)}
+                {
+                    0, new ThrusterGroup(thrustModifier)
+                }, {
+                    1, new ThrusterGroup(thrustModifier)
+                }, {
+                    2, new ThrusterGroup(thrustModifier)
+                }, {
+                    3, new ThrusterGroup(thrustModifier)
+                }
             };
         }
 
-        public void Register(IThruster thruster) {
+        public void Register(ThrusterBehaviour thruster) {
             SelectGroup(thruster)?.Add(thruster);
         }
 
-        public void Unregister(IThruster thruster) {
+        public void Unregister(ThrusterBehaviour thruster) {
             SelectGroup(thruster)?.Remove(thruster);
         }
 
         /// <summary>
-        /// Sets the graphics using a local space scalar vector
+        ///     Sets the graphics using a local space scalar vector
         /// </summary>
         /// <param name="directionScalar"></param>
         public void SetGraphics(Vector2 directionScalar) {
@@ -38,30 +41,34 @@ namespace Exa.Ships.Navigation
             SelectVerticalGroup(directionScalar.y, true).SetGraphics(0);
         }
 
-        private ThrusterGroup SelectGroup(IThruster thruster) {
+        private ThrusterGroup SelectGroup(BlockBehaviour thruster) {
             var rotation = GetDirection(thruster);
+
             try {
                 return thrusterDict[rotation];
-            }
-            catch (KeyNotFoundException) {
+            } catch (KeyNotFoundException) {
                 Debug.LogWarning(
-                    $"thruster {thruster} with rotation {rotation} cannot find a corresponding thruster group");
+                    $"thruster {thruster} with rotation {rotation} cannot find a corresponding thruster group"
+                );
+
                 return null;
             }
         }
 
-        private ThrusterGroup SelectHorizontalGroup(float x, bool revert) =>
-            x > 0 ^ revert
+        private ThrusterGroup SelectHorizontalGroup(float x, bool revert) {
+            return (x > 0) ^ revert
                 ? thrusterDict[0]
                 : thrusterDict[2];
+        }
 
-        private ThrusterGroup SelectVerticalGroup(float y, bool revert) =>
-            y > 0 ^ revert
+        private ThrusterGroup SelectVerticalGroup(float y, bool revert) {
+            return (y > 0) ^ revert
                 ? thrusterDict[1]
                 : thrusterDict[3];
+        }
 
-        private int GetDirection(IThruster thruster) {
-            return thruster.Component.block.anchoredBlueprintBlock.blueprintBlock.Direction;
+        private static int GetDirection(BlockBehaviour thruster) {
+            return thruster.block.BlueprintBlock.Direction;
         }
     }
 }

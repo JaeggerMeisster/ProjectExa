@@ -1,13 +1,12 @@
 ﻿using System;
+using Exa.UI.Components;
 using UnityEngine;
 using UnityEngine.UI;
 
 #pragma warning disable CS0649
 
-namespace Exa.UI
-{
-    public class PromptController : MonoBehaviour
-    {
+namespace Exa.UI {
+    public class PromptController : MonoBehaviour {
         [SerializeField] private Transform ownerObject;
         [SerializeField] private Button yesButton;
         [SerializeField] private Button noButton;
@@ -15,68 +14,128 @@ namespace Exa.UI
         [SerializeField] private Transform yesNoContainer;
         [SerializeField] private Button okButton;
         [SerializeField] private Text promptText;
+        [SerializeField] private ProgressBar progressBar;
 
-        public Action<string> PromptTextSetter => value => promptText.text = value;
+        public Action<string> PromptTextSetter {
+            get => value => promptText.text = value;
+        }
 
-        public void PromptForm<T>(string message, IUIGroup uiGroup, ModelDescriptor<T> modelDescriptor,
-            Action<T> onSubmit) {
-            ActivateMessage(message, uiGroup);
-            okButton.gameObject.SetActive(true);
-            formGenerator.gameObject.SetActive(true);
+        public Prompt PromptForm<T>(
+            string message,
+            IUIGroup uiGroup,
+            ModelDescriptor<T> modelDescriptor,
+            Action<T> onSubmit
+        ) {
+            var prompt = new Prompt(
+                this,
+                message,
+                uiGroup,
+                () => { okButton.onClick.RemoveAllListeners(); },
+                new[] {
+                    okButton.gameObject,
+                    formGenerator.gameObject
+                }
+            );
+
             formGenerator.GenerateForm(modelDescriptor);
 
-            okButton.onClick.AddListener(() => {
-                onSubmit(modelDescriptor.FromDescriptor());
-                okButton.gameObject.SetActive(false);
-                formGenerator.gameObject.SetActive(false);
-                DeactivateMessage(uiGroup);
-            });
+            okButton.onClick.AddListener(
+                () => {
+                    onSubmit(modelDescriptor.FromDescriptor());
+                    prompt.CleanUp();
+                }
+            );
+
+            return prompt;
         }
 
-        public void PromptYesNo(string message, IUIGroup uiGroup, Action<bool> onClosePrompt = null) {
-            ActivateMessage(message, uiGroup);
-            yesNoContainer.gameObject.SetActive(true);
+        public Prompt PromptYesNo(string message, IUIGroup uiGroup, Action<bool> onClosePrompt = null) {
+            var prompt = new Prompt(
+                this,
+                message,
+                uiGroup,
+                () => {
+                    yesButton.onClick.RemoveAllListeners();
+                    noButton.onClick.RemoveAllListeners();
+                },
+                new[] {
+                    yesNoContainer.gameObject
+                }
+            );
 
-            yesButton.onClick.AddListener(() => {
-                onClosePrompt?.Invoke(true);
-                CleanupYesNo(uiGroup);
-            });
+            yesButton.onClick.AddListener(
+                () => {
+                    onClosePrompt?.Invoke(true);
+                    prompt.CleanUp();
+                }
+            );
 
-            noButton.onClick.AddListener(() => {
-                onClosePrompt?.Invoke(false);
-                CleanupYesNo(uiGroup);
-            });
+            noButton.onClick.AddListener(
+                () => {
+                    onClosePrompt?.Invoke(false);
+                    prompt.CleanUp();
+                }
+            );
+
+            return prompt;
         }
 
-        public void PromptOk(string message, IUIGroup uiGroup, Action onClosePrompt = null) {
-            ActivateMessage(message, uiGroup);
-            okButton.gameObject.SetActive(true);
+        public Prompt PromptOk(string message, IUIGroup uiGroup, Action onClosePrompt = null) {
+            var prompt = new Prompt(
+                this,
+                message,
+                uiGroup,
+                () => { okButton.onClick.RemoveAllListeners(); },
+                new[] {
+                    okButton.gameObject
+                }
+            );
 
-            okButton.onClick.AddListener(() => {
-                onClosePrompt?.Invoke();
-                okButton.gameObject.SetActive(false);
-                uiGroup.Interactable = true;
-                gameObject.SetActive(false);
-            });
+            okButton.onClick.AddListener(
+                () => {
+                    onClosePrompt?.Invoke();
+                    prompt.CleanUp();
+                }
+            );
+
+            return prompt;
         }
 
-        public void CleanupYesNo(IUIGroup uiGroup = null) {
-            yesNoContainer.gameObject.SetActive(false);
-            DeactivateMessage(uiGroup);
+        public IProgress<float> PromptProgress(string message, IUIGroup uiGroup) {
+            var prompt = null as Prompt;
+
+            return new Progress<float>(
+                value => {
+                    if (value == 0f) {
+                        prompt = new Prompt(
+                            this,
+                            message,
+                            uiGroup,
+                            () => { progressBar.Report(0f); },
+                            new[] {
+                                progressBar.gameObject
+                            }
+                        );
+                    }
+
+                    if (value == 1f) {
+                        prompt.CleanUp();
+                    }
+
+                    progressBar.Report(value);
+                }
+            );
         }
 
-        public void ActivateMessage(string message, IUIGroup uiGroup) {
+        internal void ActivateMessage(string message, IUIGroup uiGroup) {
             ownerObject.gameObject.SetActive(true);
             uiGroup.Interactable = false;
             promptText.text = message;
         }
 
-        public void DeactivateMessage(IUIGroup uiGroup) {
+        internal void DeactivateMessage(IUIGroup uiGroup) {
             ownerObject.gameObject.SetActive(false);
             uiGroup.Interactable = true;
-            okButton.onClick.RemoveAllListeners();
-            yesButton.onClick.RemoveAllListeners();
-            noButton.onClick.RemoveAllListeners();
         }
     }
 }
